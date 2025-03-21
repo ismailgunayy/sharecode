@@ -7,16 +7,15 @@ const io = new Server(PORT, {
 	},
 });
 
-let interval: NodeJS.Timeout;
-
 io.on("connection", (socket) => {
-	const { id, emit } = socket;
+	const { id } = socket;
 
+	console.log("Clients:", io.engine.clientsCount);
 	console.log(`new client ${id}`);
 
-	interval = setInterval(() => {
-		socket.emit("chat", "new ");
-	}, 1000);
+	socket.on("update", (data) => {
+		io.emit("update", data);
+	});
 
 	socket.on("disconnect", () => {
 		console.log(`disconnect ${id}`);
@@ -24,7 +23,6 @@ io.on("connection", (socket) => {
 });
 
 process.on("SIGINT", () => {
-	clearInterval(interval);
 	io.disconnectSockets();
 	io.close();
 });
