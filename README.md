@@ -1,6 +1,6 @@
 # ShareCode
 
-A collaborative code sharing application that allows developers to create and share code snippets in real-time.
+A collaborative code sharing application that allows developers to create and share their codes in real-time.
 
 Built with:
 
