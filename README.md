@@ -23,15 +23,3 @@ cd sharecode/client
 yarn install
 yarn dev
 ```
-
-### TODO:
-
-- [x] Set up the server and client
-- [x] Set up the first connection
-- [ ] Implement the realtime update mechanism
-  - Try with an input element at first
-- [ ] Implement the code editor [CodeMirror](https://github.com/uiwjs/react-codemirror) or [highlight.js](https://highlightjs.org/#usage)
-- [ ] Implement the rooms
-  - Rooms can be shared via link
-  - Keep the
-- [ ] Rooms should persist for 24h (maybe ?Redis?)
