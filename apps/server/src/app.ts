@@ -1,13 +1,20 @@
+import { CLIENT_ORIGIN, PORT } from "./config/index.js";
+
 import { Server } from "socket.io";
-import { PORT, CLIENT_ORIGIN } from "./config/";
 
 const io = new Server(PORT, {
 	cors: {
-		origin: CLIENT_ORIGIN,
-	},
+		origin: CLIENT_ORIGIN
+	}
 });
 
+let interval: NodeJS.Timeout;
+
 io.on("connection", (socket) => {
+	interval = setInterval(() => {
+		console.log(io.engine.clientsCount);
+	}, 1000);
+
 	const { id } = socket;
 
 	console.log("Clients:", io.engine.clientsCount);
@@ -22,7 +29,11 @@ io.on("connection", (socket) => {
 	});
 });
 
-process.on("SIGINT", () => {
-	io.disconnectSockets();
+function gracefulShutdown() {
+	clearInterval(interval);
 	io.close();
-});
+}
+
+(["SIGINT", "SIGTERM"] satisfies NodeJS.Signals[]).forEach((signal) =>
+	process.on(signal, gracefulShutdown)
+);

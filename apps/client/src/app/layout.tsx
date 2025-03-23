@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import "../globals.css";
+
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
 	title: "ShareCode",
-	description: "Share your code seamlessly",
+	description: "Share your code seamlessly"
 };
 
 export default function RootLayout({
-	children,
+	children
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
