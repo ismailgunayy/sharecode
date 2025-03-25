@@ -8,13 +8,11 @@ const io = new Server(PORT, {
 	}
 });
 
-let interval: NodeJS.Timeout;
+const interval = setInterval(() => {
+	console.log("Clients connected:", io.engine.clientsCount);
+}, 1000);
 
 io.on("connection", (socket) => {
-	interval = setInterval(() => {
-		console.log(io.engine.clientsCount);
-	}, 1000);
-
 	const { id } = socket;
 
 	console.log("Clients:", io.engine.clientsCount);

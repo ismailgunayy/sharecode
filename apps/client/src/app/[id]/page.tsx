@@ -1,34 +1,77 @@
 "use client";
 
-import { ChangeEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import useSocket from "@/api/useSocket";
+import Button from "@/components/ui/Button";
+import CodeEditor from "@/components/CodeEditor";
+import debounce from "@/utils/debounce";
+import useSocket from "@/hooks/useSocket";
 
-export default function Share() {
+export default function ShareCode() {
 	const { socket, isConnected } = useSocket();
-	const [value, setValue] = useState("");
+	const [code, setCode] = useState("");
+	const [theme, setTheme] = useState({
+		value: "monokai",
+		buffer: ""
+	});
 
 	useEffect(() => {
-		socket.on("update", (data) => setValue(data));
+		socket.on("update", (data) => setCode(data));
 	}, [socket]);
 
-	const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-		setValue(e.target.value);
-		socket.emit("update", e.target.value);
+	useEffect(() => {
+		if (theme.buffer) {
+			const dynamicImport = async () => {
+				await import(`ace-builds/src-noconflict/theme-${theme.buffer}`);
+
+				setTheme({
+					value: theme.buffer,
+					buffer: ""
+				});
+			};
+
+			dynamicImport();
+		}
+	}, [theme.buffer]);
+
+	const handleChange = debounce((value: string) => {
+		setCode(value);
+		socket.emit("update", value);
+	}, 150);
+
+	const handleThemeSwitch = () => {
+		if (theme.value === "tomorrow") {
+			setTheme({
+				...theme,
+				buffer: "monokai"
+			});
+		} else {
+			setTheme({
+				...theme,
+				buffer: "tomorrow"
+			});
+		}
 	};
 
 	return (
-		<div className="flex flex-col justify-center items-center h-full px-16">
-			<span
-				className={`inline-block w-16 h-16 rounded-full ${
-					isConnected ? "bg-green-500" : "bg-red-500"
-				}`}
-			/>
-			<textarea
-				value={value}
+		<div className="flex justify-center items-center h-full animate-fade-in">
+			<CodeEditor
+				code={code}
+				theme={theme.value}
 				onChange={handleChange}
-				className="bg-amber-200 text-black w-full"
 			/>
+			{/* TODO: Implement Sidebar components for settings and status indicator */}
+			<div className="flex-2/5 h-full justify-items-center items-start p-4">
+				<div className="flex items-center">
+					<span
+						className={`inline-block w-4 h-4 rounded-full mr-1 ${
+							isConnected ? "bg-green-500" : "bg-red-500"
+						}`}
+					></span>
+					<span>{isConnected ? "Connected" : "Disconnected"}</span>
+				</div>
+				<Button onClick={handleThemeSwitch}>Switch</Button>
+			</div>
 		</div>
 	);
 }

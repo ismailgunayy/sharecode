@@ -1,4 +1,4 @@
-import "../globals.css";
+import "@/styles/globals.css";
 
 import type { Metadata } from "next";
 
@@ -14,6 +14,13 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
+			<head>
+				<link
+					rel="shortcut icon"
+					href="favicon1_dall_e.ico"
+					type="image/x-icon"
+				/>
+			</head>
 			<body>{children}</body>
 		</html>
 	);
