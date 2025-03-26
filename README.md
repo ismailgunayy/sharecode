@@ -39,8 +39,8 @@ yarn dev
 
 This will start:
 
-- Client http://localhost:3000
-- Server ws://localhost:8080
+- Client http://localhost:3023
+- Server ws://localhost:8023
 
 ## License
 
