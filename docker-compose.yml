@@ -1,0 +1,20 @@
+services:
+  server:
+    container_name: sharecode-server
+    command: yarn start-server
+    build:
+      context: .
+      dockerfile: apps/server/Dockerfile
+    restart: always
+    ports:
+      - 8080:8080
+
+  client:
+    container_name: sharecode-client
+    command: yarn start-client
+    build:
+      context: .
+      dockerfile: apps/client/Dockerfile
+    restart: always
+    ports:
+      - 3000:3000

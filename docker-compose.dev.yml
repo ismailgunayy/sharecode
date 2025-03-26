@@ -1,0 +1,29 @@
+services:
+  server:
+    container_name: sharecode-server-dev
+    command: yarn dev-server
+    build:
+      context: .
+      dockerfile: apps/server/Dockerfile.dev
+    restart: always
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 8080:8080
+
+  client:
+    container_name: sharecode-client-dev
+    command: yarn dev-client
+    build:
+      context: .
+      dockerfile: apps/client/Dockerfile.dev
+    restart: always
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 3000:3000
+
+volumes:
+  node_modules:

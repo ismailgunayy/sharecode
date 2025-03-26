@@ -7,3 +7,7 @@
 - [x] Implement the code editor with [react-ace](https://securingsincity.github.io/react-ace/)
 - [ ] Implement sessions
   - Users should be able to share the session via links
+
+##### Refactors
+
+- [ ] Optimise Dockerfiles and compose files (both prod and dev)
