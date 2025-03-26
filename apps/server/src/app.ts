@@ -8,6 +8,9 @@ const io = new Server(PORT, {
 	}
 });
 
+console.log("CLIENT_ORIGIN:", CLIENT_ORIGIN);
+console.log(`Socket server listening on ${PORT}`);
+
 const interval = setInterval(() => {
 	console.log("Clients connected:", io.engine.clientsCount);
 }, 1000);
