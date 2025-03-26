@@ -6,7 +6,7 @@ let socket: Socket;
 
 const getSocket = () => {
 	if (!socket) {
-		socket = io("ws://localhost:8080", {});
+		socket = io(process.env.WS_SERVER_URL);
 	}
 
 	return socket;
