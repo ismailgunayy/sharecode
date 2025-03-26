@@ -9,7 +9,11 @@
 		"dev": "turbo run dev",
 		"clean": "rimraf ./.turbo; turbo clean",
 		"build": "turbo run build",
-		"start": "turbo start",
+		"build-client": "turbo run build --filter client",
+		"build-server": "turbo run build --filter server",
+		"start": "turbo run start",
+		"start-client": "turbo run start --filter client",
+		"start-server": "turbo run start --filter server",
 		"lint": "turbo run lint",
 		"check-types": "turbo run check-types",
 		"format": "prettier --write \"**/*.{ts,tsx,css,json,md}\""
