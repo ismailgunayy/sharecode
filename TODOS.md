@@ -7,6 +7,7 @@
 - [x] Implement the code editor with [react-ace](https://securingsincity.github.io/react-ace/)
 - [ ] Implement sessions
   - Users should be able to share the session via links
+- [ ] Users should be able to see each other's caret positions and selected texts
 
 #### Bugs
 
