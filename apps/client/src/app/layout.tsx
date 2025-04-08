@@ -17,7 +17,7 @@ export default function RootLayout({
 			<head>
 				<link
 					rel="shortcut icon"
-					href="favicon1_dall_e.ico"
+					href="favicon_dall_e.ico"
 					type="image/x-icon"
 				/>
 			</head>
