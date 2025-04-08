@@ -1,20 +1,28 @@
 services:
   server:
     container_name: sharecode-server
-    command: yarn start-server
+    command: yarn start:server
     build:
       context: .
       dockerfile: apps/server/Dockerfile
     restart: always
+    depends_on:
+      - redis
     ports:
-      - 8080:8080
+      - 8023:8023
 
   client:
     container_name: sharecode-client
-    command: yarn start-client
+    command: yarn start:client
     build:
       context: .
       dockerfile: apps/client/Dockerfile
     restart: always
     ports:
-      - 3000:3000
+      - 3023:3023
+
+  redis:
+    image: redis:7.2
+    restart: always
+    ports:
+      - 6379:6379

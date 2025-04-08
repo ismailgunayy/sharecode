@@ -1,7 +1,7 @@
 services:
   server:
     container_name: sharecode-server-dev
-    command: yarn dev-server
+    command: yarn dev:server
     build:
       context: .
       dockerfile: apps/server/Dockerfile.dev
@@ -9,12 +9,14 @@ services:
     volumes:
       - ./:/usr/src/app
       - /usr/src/app/node_modules
+    depends_on:
+      - redis
     ports:
-      - 8080:8080
+      - 8023:8023
 
   client:
     container_name: sharecode-client-dev
-    command: yarn dev-client
+    command: yarn dev:client
     build:
       context: .
       dockerfile: apps/client/Dockerfile.dev
@@ -23,7 +25,13 @@ services:
       - ./:/usr/src/app
       - /usr/src/app/node_modules
     ports:
-      - 3000:3000
+      - 3023:3023
+
+  redis:
+    image: redis:7.2
+    restart: always
+    ports:
+      - 6379:6379
 
 volumes:
   node_modules:

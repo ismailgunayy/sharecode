@@ -14,4 +14,4 @@ COPY . .
 
 RUN yarn build-client
 
-EXPOSE 8080
+EXPOSE 3023

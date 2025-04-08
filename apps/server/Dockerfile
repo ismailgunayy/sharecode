@@ -14,4 +14,4 @@ COPY . .
 
 RUN yarn build-server
 
-EXPOSE 8080
+EXPOSE 8023

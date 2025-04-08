@@ -9,4 +9,4 @@ COPY apps/client/package.json ./apps/client/package.json
 RUN corepack enable
 RUN yarn install --frozen-lockfile
 
-EXPOSE 8080
+EXPOSE 3023
