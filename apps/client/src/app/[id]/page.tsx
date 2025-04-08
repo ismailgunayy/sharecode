@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import Button from "@/components/ui/Button";
 import CodeEditor from "@/components/CodeEditor";
-import debounce from "@/utils/debounce";
+import debounce from "@/helpers/debounce";
 import useSocket from "@/hooks/useSocket";
 
 export default function ShareCode() {
@@ -34,10 +34,14 @@ export default function ShareCode() {
 		}
 	}, [theme.buffer]);
 
-	const handleChange = debounce((value: string) => {
-		setCode(value);
-		socket.emit("update", value);
-	}, 150);
+	const handleChange = debounce(
+		(value: string) => {
+			setCode(value);
+			socket.emit("update", value);
+		},
+		150,
+		1000
+	);
 
 	const handleThemeSwitch = () => {
 		if (theme.value === "tomorrow") {
