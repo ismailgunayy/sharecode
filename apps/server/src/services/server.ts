@@ -1,4 +1,4 @@
-import { config } from "@/config";
+import config from "@/common/config";
 import cors from "cors";
 import express from "express";
 import http from "http";

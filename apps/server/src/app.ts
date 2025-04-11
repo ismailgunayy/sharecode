@@ -1,6 +1,6 @@
-import createHTTPServer from "./services/http";
+import createHTTPServer from "./services/server";
 import createSocketServer from "./services/socket";
-import { env } from "./config";
+import env from "./common/env";
 
 const httpServer = createHTTPServer();
 const socketServer = createSocketServer();
