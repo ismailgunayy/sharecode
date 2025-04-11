@@ -1,4 +1,4 @@
-import config from "@/common/config";
+import config from "@/config";
 import cors from "cors";
 import express from "express";
 import helmet from "helmet";
@@ -10,7 +10,11 @@ const createHTTPServer = () => {
 	const app = express();
 
 	app.use(helmet());
-	app.use(cors(config.cors));
+	app.use(
+		cors({
+			origin: config.CLIENT_URL
+		})
+	);
 	app.use(
 		rateLimit({
 			windowMs: 15 * 60 * 1000, // 15 minutes

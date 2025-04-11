@@ -1,9 +1,11 @@
 import { Server } from "socket.io";
-import config from "@/common/config";
+import config from "@/config";
 
 const createSocketServer = () => {
 	const io = new Server({
-		cors: config.cors
+		cors: {
+			origin: config.CLIENT_URL
+		}
 	});
 
 	io.on("connection", (socket) => {

@@ -1,13 +1,13 @@
+import config from "./config";
 import createHTTPServer from "./services/http";
 import createSocketServer from "./services/socket";
-import env from "./common/env";
 
 const httpServer = createHTTPServer();
 const socketServer = createSocketServer();
 socketServer.attach(httpServer);
 
-httpServer.listen(env.PORT, () => {
-	console.log(`Server listening on port ${env.PORT}`);
+httpServer.listen(config.PORT, () => {
+	console.log(`Server listening on port ${config.PORT}`);
 });
 
 function gracefulShutdown() {
