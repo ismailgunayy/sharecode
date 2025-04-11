@@ -1,7 +1,7 @@
 const debounce = <T extends unknown[]>(
 	callback: (...args: T) => void,
 	wait: number,
-	executeAfter?: number
+	executeAfter?: number // the function will be executed after this time with the last arguments
 ) => {
 	let timeout: NodeJS.Timeout;
 	let lastExecuted: number;

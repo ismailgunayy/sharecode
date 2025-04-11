@@ -64,7 +64,7 @@ export default function ShareCode() {
 				theme={theme.value}
 				onChange={handleChange}
 			/>
-			{/* TODO: Implement Sidebar components for settings and status indicator */}
+			{/* // TODO: Implement Sidebar components for settings and status indicator */}
 			<div className="flex-2/5 h-full justify-items-center items-start p-4">
 				<div className="flex items-center">
 					<span

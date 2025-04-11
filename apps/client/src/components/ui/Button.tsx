@@ -1,12 +1,22 @@
-const Button = ({
-	className,
-	...props
-}: React.ButtonHTMLAttributes<HTMLButtonElement>) => {
+import React from "react";
+
+type TButtonProps = {
+	isLoading?: boolean;
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+
+const Button = ({ className = "", isLoading, ...props }: TButtonProps) => {
 	return (
 		<button
-			className={`border-2 rounded-lg p-4 text-lg cursor-pointer hover:bg-primary hover:text-secondary transition ${className}`}
+			className={`border-2 rounded-lg p-4 text-lg cursor-pointer bg-primary text-secondary transition
+				hover:bg-secondary hover:text-primary
+				disabled:cursor-not-allowed
+				${isLoading ? "animate-pulse" : ""}
+				${className}`}
+			disabled={isLoading}
 			{...props}
-		></button>
+		>
+			{props.children}
+		</button>
 	);
 };
 
