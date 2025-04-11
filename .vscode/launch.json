@@ -1,0 +1,41 @@
+{
+	"compounds": [
+		{
+			"configurations": ["Debug Server", "Debug Client"],
+			"name": "Server + Client",
+			"presentation": {
+				"group": "Monorepo",
+				"hidden": false,
+				"order": 1
+			},
+			"stopAll": true
+		}
+	],
+	"configurations": [
+		{
+			"name": "Debug Server",
+			"autoAttachChildProcesses": true,
+			"console": "internalConsole",
+			"cwd": "${workspaceRoot}",
+			"internalConsoleOptions": "openOnSessionStart",
+			"request": "launch",
+			"runtimeArgs": ["dev:server"],
+			"runtimeExecutable": "yarn",
+			"runtimeVersion": "22.12.0",
+			"skipFiles": ["<node_internals>/**"],
+			"type": "node"
+		},
+		{
+			"name": "Debug Client",
+			"autoAttachChildProcesses": true,
+			"console": "internalConsole",
+			"cwd": "${workspaceRoot}",
+			"request": "launch",
+			"runtimeArgs": ["dev:client"],
+			"runtimeExecutable": "yarn",
+			"runtimeVersion": "22.12.0",
+			"skipFiles": ["<node_internals>/**"],
+			"type": "node"
+		}
+	]
+}
