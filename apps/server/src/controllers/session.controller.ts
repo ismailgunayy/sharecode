@@ -21,8 +21,6 @@ export const createSession = async (_req: Request, res: Response) => {
 		console.error("Redis Error", error);
 	}
 
-	await new Promise((resolve) => setTimeout(resolve, 500));
-
 	res.status(201).json(session);
 };
 
