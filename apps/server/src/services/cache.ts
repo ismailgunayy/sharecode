@@ -1,10 +1,12 @@
 import { RedisClientType, createClient } from "redis";
 
+import config from "../config/index.js";
+
 class CacheService {
 	private client: RedisClientType;
 
 	public constructor() {
-		this.client = createClient();
+		this.client = createClient({ url: config.REDIS_URL });
 
 		this.client.on("error", (error) => {
 			console.error("Redis Client Error", error);
