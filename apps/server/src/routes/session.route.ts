@@ -1,16 +1,11 @@
-import {
-	createSession,
-	deleteSession,
-	getSession
-} from "../controllers/session.controller.js";
-
 import { Router } from "express";
+import { controllers } from "../container/index.js";
 
 const sessionRouter = () => {
 	return Router()
-		.get("/:sessionID", getSession)
-		.post("/", createSession)
-		.delete("/", deleteSession);
+		.get("/:sessionID", controllers.session.get)
+		.post("/", controllers.session.create)
+		.delete("/", controllers.session.delete);
 };
 
 export default sessionRouter;

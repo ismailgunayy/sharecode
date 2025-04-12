@@ -1,31 +1,37 @@
+import express, { Router } from "express";
+import http, { Server } from "http";
+
 import config from "../config/index.js";
 import cors from "cors";
-import express from "express";
 import helmet from "helmet";
-import http from "http";
-import mainRouter from "../routes/index.js";
 import rateLimit from "express-rate-limit";
 
-const createHTTPServer = () => {
-	const app = express();
+class HTTPService {
+	public server: Server;
+	private app; // Express cannot be used as a type
 
-	app.use(helmet());
-	app.use(
-		cors({
-			origin: config.CLIENT_URL
-		})
-	);
-	app.use(
-		rateLimit({
-			windowMs: 15 * 60 * 1000, // 15 minutes
-			limit: 100,
-			message: "Too many requests, please try again later."
-		})
-	);
+	public constructor() {
+		this.app = express();
+		this.app.use(helmet());
+		this.app.use(
+			cors({
+				origin: config.CLIENT_URL
+			})
+		);
+		this.app.use(
+			rateLimit({
+				windowMs: 15 * 60 * 1000, // 15 minutes
+				limit: 100,
+				message: "Too many requests, please try again later."
+			})
+		);
 
-	app.use("/api", mainRouter());
+		this.server = http.createServer(this.app);
+	}
 
-	return http.createServer(app);
-};
+	public setup(router: Router) {
+		this.app.use("/api", router);
+	}
+}
 
-export default createHTTPServer;
+export default HTTPService;

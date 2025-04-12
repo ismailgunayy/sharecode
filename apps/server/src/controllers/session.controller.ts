@@ -1,81 +1,91 @@
+import CacheService from "../services/cache.js";
 import { TController } from "../types/express.type.js";
 import { TSession } from "../types/common.type.js";
-import redisClient from "../services/cache.js";
 import { v4 as uuid } from "uuid";
 
-export const getSession: TController = async (req, res) => {
-	const sessionID = req.params.sessionID;
+class SessionController {
+	private cacheService: CacheService;
 
-	if (!sessionID) {
-		return res
-			.status(401)
-			.json({ message: "'sessionID' is required", success: false });
+	public constructor(cacheService: CacheService) {
+		this.cacheService = cacheService;
 	}
 
-	try {
-		const response = await redisClient.get(sessionID);
+	get: TController = async (req, res) => {
+		const sessionID = req.params.sessionID;
 
-		if (response) {
-			const session = JSON.parse(response) as TSession;
+		if (!sessionID) {
 			return res
-				.status(200)
-				.json({ message: "Session found", success: true, data: session });
-		} else {
-			return res
-				.status(404)
-				.json({ message: "Session not found", success: false });
+				.status(401)
+				.json({ message: "'sessionID' is required", success: false });
 		}
-	} catch {
-		return res
-			.status(500)
-			.json({ message: "Internal Server Error", success: false });
-	}
-};
 
-export const createSession: TController = async (_req, res) => {
-	const sessionID = uuid();
+		try {
+			const response = await this.cacheService.get(sessionID);
 
-	const session: TSession = {
-		id: sessionID,
-		createdAt: new Date(),
-		updatedAt: null,
-		data: "",
-		language: "typescript"
+			if (response) {
+				const session = JSON.parse(response) as TSession;
+				return res
+					.status(200)
+					.json({ message: "Session found", success: true, data: session });
+			} else {
+				return res
+					.status(404)
+					.json({ message: "Session not found", success: false });
+			}
+		} catch {
+			return res
+				.status(500)
+				.json({ message: "Internal Server Error", success: false });
+		}
 	};
 
-	try {
-		await redisClient.set(sessionID, JSON.stringify(session));
+	create: TController = async (_req, res) => {
+		const sessionID = uuid();
 
-		return res.status(201).json({
-			message: "Session created succesfully",
-			success: true,
-			data: session
-		});
-	} catch {
+		const session: TSession = {
+			id: sessionID,
+			createdAt: new Date(),
+			updatedAt: null,
+			data: "",
+			language: "typescript"
+		};
+
+		try {
+			await this.cacheService.set(sessionID, JSON.stringify(session));
+
+			return res.status(201).json({
+				message: "Session created succesfully",
+				success: true,
+				data: session
+			});
+		} catch {
+			return res
+				.status(500)
+				.json({ message: "Internal Server Error", success: false });
+		}
+	};
+
+	delete: TController = async (req, res) => {
+		const sessionID: string = req.body.sessionID;
+
+		if (!sessionID) {
+			return res
+				.status(400)
+				.json({ message: "'sessionID' is required", success: false });
+		}
+
+		try {
+			await this.cacheService.del(sessionID);
+		} catch {
+			return res
+				.status(500)
+				.json({ message: "Internal Server Error", success: false });
+		}
+
 		return res
-			.status(500)
-			.json({ message: "Internal Server Error", success: false });
-	}
-};
+			.status(200)
+			.json({ message: "Session deleted succesfully", success: true });
+	};
+}
 
-export const deleteSession: TController = async (req, res) => {
-	const sessionID: string = req.body.sessionID;
-
-	if (!sessionID) {
-		return res
-			.status(400)
-			.json({ message: "'sessionID' is required", success: false });
-	}
-
-	try {
-		await redisClient.del(sessionID);
-	} catch {
-		return res
-			.status(500)
-			.json({ message: "Internal Server Error", success: false });
-	}
-
-	return res
-		.status(200)
-		.json({ message: "Session deleted succesfully", success: true });
-};
+export default SessionController;

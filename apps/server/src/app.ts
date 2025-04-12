@@ -1,21 +1,29 @@
+import { cacheService, httpService, socketService } from "./container/index.js";
+
 import config from "./config/index.js";
-import createHTTPServer from "./services/http.js";
-import createSocketServer from "./services/socket.js";
+import mainRouter from "./routes/index.js";
 
-const httpServer = createHTTPServer();
-const socketServer = createSocketServer();
-socketServer.attach(httpServer);
+const init = async () => {
+	await cacheService.connect();
 
-httpServer.listen(config.PORT, () => {
-	console.log(`Server listening on port ${config.PORT}`);
+	socketService.server.attach(httpService.server);
+	httpService.setup(mainRouter());
+	httpService.server.listen(config.PORT, () => {
+		console.log(`Server listening on port ${config.PORT}`);
+	});
+
+	function gracefulShutdown() {
+		socketService.server.close();
+		httpService.server.close();
+	}
+
+	// TODO: Change with 'satisfies' and look into the 'sort-imports' package
+	(["SIGINT", "SIGTERM"] as NodeJS.Signals[]).forEach((signal) =>
+		process.on(signal, gracefulShutdown)
+	);
+};
+
+init().catch((error) => {
+	console.error("Failed to start server:", error);
+	process.exit(1);
 });
-
-function gracefulShutdown() {
-	socketServer.close();
-	httpServer.close();
-}
-
-// TODO: Change with 'satisfies' and look into the 'sort-imports' package
-(["SIGINT", "SIGTERM"] as NodeJS.Signals[]).forEach((signal) =>
-	process.on(signal, gracefulShutdown)
-);
