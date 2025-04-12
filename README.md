@@ -38,8 +38,8 @@ yarn dev
 
 This will start:
 
-- Client http://localhost:3023
-- Server ws://localhost:8023
+- Client -> `http://localhost:3023`
+- Server -> `http://localhost:8023` and `ws://localhost:8023`
 
 ## License
 
