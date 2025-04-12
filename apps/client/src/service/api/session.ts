@@ -5,16 +5,36 @@ type TSession = {
 	id: string;
 	createdAt: Date;
 	updatedAt: Date | null;
-	data: string | null;
+	data: string;
 	language: string;
 };
 
-export const createSession = async (): Promise<TSession> => {
-	const response = await api.post(ENDPOINTS.SESSION.CREATE);
+export const getSession = async (
+	sessionID: string
+): Promise<TSession | void> => {
+	try {
+		const response = await api.get(`${ENDPOINTS.SESSION.GET}/${sessionID}`);
 
-	if (response.status !== 201) {
-		throw new Error("Error creating session");
+		if (!response.data.success) {
+			throw new Error("Could not fetch the sesssion");
+		}
+
+		return response.data.data;
+	} catch (error) {
+		console.error(error);
 	}
+};
 
-	return response.data;
+export const createSession = async (): Promise<TSession | void> => {
+	try {
+		const response = await api.post(ENDPOINTS.SESSION.CREATE);
+
+		if (!response.data.success) {
+			throw new Error("Could not create the session");
+		}
+
+		return response.data.data;
+	} catch (error) {
+		console.error(error);
+	}
 };

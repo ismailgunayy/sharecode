@@ -1,5 +1,7 @@
 import { Server } from "socket.io";
+import { TSession } from "@/types/common.type";
 import config from "@/config";
+import redisClient from "./cache";
 
 const createSocketServer = () => {
 	const io = new Server({
@@ -11,11 +13,26 @@ const createSocketServer = () => {
 	io.on("connection", (socket) => {
 		const { id } = socket;
 
-		console.log("Clients:", io.engine.clientsCount);
-		console.log(`new client ${id}`);
+		socket.on("create room", (sessionID) => {
+			socket.join(sessionID);
+		});
 
-		socket.on("update", (data) => {
-			io.emit("update", data);
+		socket.on("update", async ({ sessionID, data }) => {
+			try {
+				const response = await redisClient.get(sessionID);
+
+				if (response) {
+					const session: TSession = JSON.parse(response);
+					await redisClient.set(
+						sessionID,
+						JSON.stringify({ ...session, data })
+					);
+
+					io.to(sessionID).emit("update", data);
+				}
+			} catch {
+				console.error("Couldn't update and publish the data");
+			}
 		});
 
 		socket.on("disconnect", () => {

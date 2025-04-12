@@ -1,14 +1,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
 
 import Button from "@/components/ui/Button";
 import CodeEditor from "@/components/CodeEditor";
 import debounce from "@/helpers/debounce";
+import { getSession } from "@/service/api/session";
+import toast from "react-hot-toast";
 import useSocket from "@/hooks/useSocket";
 
 export default function ShareCode() {
-	const { socket, isConnected } = useSocket();
+	const router = useRouter();
+	const params = useParams();
+	const sessionID = params.id as string;
+
+	const { socket, isConnected } = useSocket(sessionID);
 	const [code, setCode] = useState("");
 	const [theme, setTheme] = useState({
 		value: "monokai",
@@ -16,8 +23,22 @@ export default function ShareCode() {
 	});
 
 	useEffect(() => {
-		socket.on("update", (data) => setCode(data));
-	}, [socket]);
+		(async () => {
+			const session = await getSession(sessionID);
+			if (session) {
+				setCode(session.data);
+			} else {
+				toast.error("Session not found", { id: "session-not-found" });
+				router.push("/");
+			}
+		})();
+	}, [sessionID, router]);
+
+	useEffect(() => {
+		socket.on("update", (update) => {
+			setCode(update);
+		});
+	}, [socket, sessionID]);
 
 	useEffect(() => {
 		if (theme.buffer) {
@@ -35,9 +56,9 @@ export default function ShareCode() {
 	}, [theme.buffer]);
 
 	const handleChange = debounce(
-		(value: string) => {
-			setCode(value);
-			socket.emit("update", value);
+		(data: string) => {
+			setCode(data);
+			socket.emit("update", { sessionID, data });
 		},
 		150,
 		1000

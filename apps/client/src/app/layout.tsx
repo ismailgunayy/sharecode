@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 
 import type { Metadata } from "next";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
 	title: "ShareCode",
@@ -21,7 +22,20 @@ export default function RootLayout({
 					type="image/x-icon"
 				/>
 			</head>
-			<body>{children}</body>
+			<body>
+				<Toaster
+					position="bottom-right"
+					toastOptions={{
+						duration: 8000,
+						removeDelay: 1000,
+						style: {
+							background: "#363636",
+							color: "#fff"
+						}
+					}}
+				/>
+				{children}
+			</body>
 		</html>
 	);
 }

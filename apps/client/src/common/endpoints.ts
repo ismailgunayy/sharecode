@@ -7,6 +7,7 @@ const withBase = (path: string) => `${BASE_URL}${path}`;
 const ENDPOINTS = {
 	BASE_URL,
 	SESSION: {
+		GET: withBase("/session"),
 		CREATE: withBase("/session")
 	}
 };

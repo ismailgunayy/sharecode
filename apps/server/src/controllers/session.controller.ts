@@ -1,41 +1,81 @@
-import { Request, Response } from "express";
-
+import { TController } from "@/types/express.type";
 import { TSession } from "@/types/common.type";
 import redisClient from "@/services/cache";
 import { v4 as uuid } from "uuid";
 
-export const createSession = async (_req: Request, res: Response) => {
-	const sessionId = uuid();
+export const getSession: TController = async (req, res) => {
+	const sessionID = req.params.sessionID;
+
+	if (!sessionID) {
+		return res
+			.status(401)
+			.json({ message: "'sessionID' is required", success: false });
+	}
+
+	try {
+		const response = await redisClient.get(sessionID);
+
+		if (response) {
+			const session = JSON.parse(response) as TSession;
+			return res
+				.status(200)
+				.json({ message: "Session found", success: true, data: session });
+		} else {
+			return res
+				.status(404)
+				.json({ message: "Session not found", success: false });
+		}
+	} catch {
+		return res
+			.status(500)
+			.json({ message: "Internal Server Error", success: false });
+	}
+};
+
+export const createSession: TController = async (_req, res) => {
+	const sessionID = uuid();
 
 	const session: TSession = {
-		id: sessionId,
+		id: sessionID,
 		createdAt: new Date(),
 		updatedAt: null,
-		data: null,
+		data: "",
 		language: "typescript"
 	};
 
 	try {
-		// redisClient.set(sessionId, JSON.stringify(session));
-	} catch (error) {
-		console.error("Redis Error", error);
-	}
+		await redisClient.set(sessionID, JSON.stringify(session));
 
-	res.status(201).json(session);
+		return res.status(201).json({
+			message: "Session created succesfully",
+			success: true,
+			data: session
+		});
+	} catch {
+		return res
+			.status(500)
+			.json({ message: "Internal Server Error", success: false });
+	}
 };
 
-export const deleteSession = async (req: Request, res: Response) => {
-	if (!req.body.sessionId) {
-		res.status(400).json({ error: "sessionId is required" });
+export const deleteSession: TController = async (req, res) => {
+	const sessionID: string = req.body.sessionID;
+
+	if (!sessionID) {
+		return res
+			.status(400)
+			.json({ message: "'sessionID' is required", success: false });
 	}
-	const sessionId: string = req.body.sessionId;
 
 	try {
-		redisClient.del(sessionId);
-	} catch (error) {
-		console.error("Redis Error", error);
-		res.status(500).json({ error: "Internal Server Error" });
+		await redisClient.del(sessionID);
+	} catch {
+		return res
+			.status(500)
+			.json({ message: "Internal Server Error", success: false });
 	}
 
-	res.status(200).json({ message: "Session deleted" });
+	return res
+		.status(200)
+		.json({ message: "Session deleted succesfully", success: true });
 };

@@ -15,7 +15,7 @@ export default function Home() {
 		const data = await createSession();
 		setIsLoading(false);
 
-		if (data.id) {
+		if (data?.id) {
 			router.push(`/${data.id}`);
 		}
 	};
