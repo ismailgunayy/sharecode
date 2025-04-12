@@ -15,12 +15,11 @@ This is a monorepo created with [TurboRepo](https://turbo.build/repo/docs)
 - **Frontend**: Next.js, React, TailwindCSS, Socket.io-client
 - **Backend**: Node.js, Socket.io
 
-## Requirements
+## Getting Started
 
+#### Requirements
 - Node.js v22.12.0
 - Yarn v1.22.22
-
-## Getting Started
 
 ```bash
 # Clone the repository
