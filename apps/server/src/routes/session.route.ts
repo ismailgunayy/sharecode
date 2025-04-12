@@ -2,7 +2,7 @@ import {
 	createSession,
 	deleteSession,
 	getSession
-} from "@/controllers/session.controller";
+} from "../controllers/session.controller.js";
 
 import { Router } from "express";
 

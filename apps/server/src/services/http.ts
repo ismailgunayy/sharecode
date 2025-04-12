@@ -1,9 +1,9 @@
-import config from "@/config";
+import config from "../config/index.js";
 import cors from "cors";
 import express from "express";
 import helmet from "helmet";
 import http from "http";
-import mainRouter from "@/routes";
+import mainRouter from "../routes/index.js";
 import rateLimit from "express-rate-limit";
 
 const createHTTPServer = () => {

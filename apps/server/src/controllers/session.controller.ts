@@ -1,6 +1,6 @@
-import { TController } from "@/types/express.type";
-import { TSession } from "@/types/common.type";
-import redisClient from "@/services/cache";
+import { TController } from "../types/express.type.js";
+import { TSession } from "../types/common.type.js";
+import redisClient from "../services/cache.js";
 import { v4 as uuid } from "uuid";
 
 export const getSession: TController = async (req, res) => {

@@ -1,7 +1,7 @@
 import { Server } from "socket.io";
-import { TSession } from "@/types/common.type";
-import config from "@/config";
-import redisClient from "./cache";
+import { TSession } from "../types/common.type.js";
+import config from "../config/index.js";
+import redisClient from "./cache.js";
 
 const createSocketServer = () => {
 	const io = new Server({

@@ -1,6 +1,6 @@
-import config from "./config";
-import createHTTPServer from "./services/http";
-import createSocketServer from "./services/socket";
+import config from "./config/index.js";
+import createHTTPServer from "./services/http.js";
+import createSocketServer from "./services/socket.js";
 
 const httpServer = createHTTPServer();
 const socketServer = createSocketServer();
