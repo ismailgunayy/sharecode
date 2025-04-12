@@ -9,7 +9,7 @@
 		"dev": "turbo run dev",
 		"dev:client": "turbo run dev --filter client",
 		"dev:server": "turbo run dev --filter server",
-		"clean": "rimraf ./.turbo; turbo clean",
+		"clean": "rimraf .turbo out; turbo clean",
 		"build": "turbo run build",
 		"build:client": "turbo run build --filter client",
 		"build:server": "turbo run build --filter server",
