@@ -8,4 +8,4 @@ export type TController = (
 		success: boolean;
 	}>,
 	next: NextFunction
-) => Promise;
+) => Promise<unknown>;
