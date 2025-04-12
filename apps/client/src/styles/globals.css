@@ -6,8 +6,8 @@
 	--color-primary: #ecdfcc;
 	--color-secondary: #1e201e;
 
-	--animate-fade-in: fade-in 2.3s ease-in-out forwards;
-	@keyframes fade-in {
+	--animate-fade-in: custom-fade-in 2.3s ease-in-out forwards;
+	@keyframes custom-fade-in {
 		0%,
 		50% {
 			opacity: 0;
@@ -15,6 +15,13 @@
 
 		100% {
 			opacity: 1;
+		}
+	}
+
+	--animate-custom-pulse: custom-pulse 2s ease-in-out infinite;
+	@keyframes custom-pulse {
+		50% {
+			transform: scale(1.23);
 		}
 	}
 }
@@ -34,7 +41,10 @@
 body {
 	color: var(--foreground);
 	background: var(--background);
-	font-family: Arial, Helvetica, sans-serif;
 	width: 100vw;
 	height: 100vh;
+}
+
+.transition-custom {
+	transition: all 1s;
 }

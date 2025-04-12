@@ -1,8 +1,10 @@
+import { ReactNode } from "react";
 import dynamic from "next/dynamic";
 
 interface ICodeEditorProps {
 	code: string;
 	theme: string;
+	statusIndicator: ReactNode;
 	onChange: (value: string) => void;
 }
 
@@ -18,25 +20,40 @@ const AceEditor = dynamic(
 	{ ssr: false }
 );
 
-const CodeEditor = ({ code, theme, onChange }: ICodeEditorProps) => {
+const CodeEditor = ({
+	code,
+	theme,
+	statusIndicator,
+	onChange
+}: ICodeEditorProps) => {
 	return (
-		<AceEditor
-			width="100%"
-			height="100%"
-			value={code}
-			highlightActiveLine={true}
-			focus={true}
-			onChange={onChange}
-			mode="typescript"
-			theme={theme}
-			setOptions={{
-				showLineNumbers: true,
-				fontSize: 13,
-				tabSize: 2,
-				printMargin: false,
-				displayIndentGuides: true
-			}}
-		/>
+		<div className="relative w-full h-full">
+			<AceEditor
+				width="100%"
+				height="100%"
+				value={code}
+				focus={true}
+				onChange={onChange}
+				mode="typescript"
+				theme={theme}
+				setOptions={{
+					cursorStyle: "smooth",
+					enableBasicAutocompletion: true,
+					enableLiveAutocompletion: true,
+					enableMultiselect: true,
+					fadeFoldWidgets: true,
+					foldStyle: "markbegin",
+					fontSize: 13,
+					highlightSelectedWord: true,
+					printMargin: false,
+					showFoldWidgets: true,
+					showLineNumbers: true,
+					tabSize: 2,
+					wrap: true
+				}}
+			/>
+			<div className="absolute top-4 right-3">{statusIndicator}</div>
+		</div>
 	);
 };
 

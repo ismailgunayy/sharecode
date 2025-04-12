@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 
-import Button from "@/components/ui/Button";
 import CodeEditor from "@/components/CodeEditor";
 import debounce from "@/helpers/debounce";
 import { getSession } from "@/service/api/session";
@@ -32,7 +31,7 @@ export default function ShareCode() {
 				router.push("/");
 			}
 		})();
-	}, [sessionID, router]);
+	}, [sessionID, router, isConnected, socket]);
 
 	useEffect(() => {
 		socket.on("update", (update) => {
@@ -64,38 +63,37 @@ export default function ShareCode() {
 		1000
 	);
 
-	const handleThemeSwitch = () => {
-		if (theme.value === "tomorrow") {
-			setTheme({
-				...theme,
-				buffer: "monokai"
-			});
-		} else {
-			setTheme({
-				...theme,
-				buffer: "tomorrow"
-			});
-		}
-	};
+	// const handleThemeSwitch = () => {
+	// 	if (theme.value === "tomorrow") {
+	// 		setTheme({
+	// 			...theme,
+	// 			buffer: "monokai"
+	// 		});
+	// 	} else {
+	// 		setTheme({
+	// 			...theme,
+	// 			buffer: "tomorrow"
+	// 		});
+	// 	}
+	// };
 
 	return (
-		<div className="flex justify-center items-center h-full animate-fade-in">
+		<div className="flex justify-center items-center h-full">
 			<CodeEditor
 				code={code}
 				theme={theme.value}
+				statusIndicator={
+					<div
+						className={`inline-block w-6 h-6 rounded-full mr-1 ${
+							isConnected ? "bg-green-500 animate-custom-pulse" : "bg-red-500"
+						} transition-custom`}
+					/>
+				}
 				onChange={handleChange}
 			/>
-			{/* // TODO: Implement Sidebar components for settings and status indicator */}
-			<div className="flex-2/5 h-full justify-items-center items-start p-4">
-				<div className="flex items-center">
-					<span
-						className={`inline-block w-4 h-4 rounded-full mr-1 ${
-							isConnected ? "bg-green-500" : "bg-red-500"
-						}`}
-					></span>
-					<span>{isConnected ? "Connected" : "Disconnected"}</span>
-				</div>
-				<Button onClick={handleThemeSwitch}>Switch</Button>
+			{/* // TODO: Implement Sidebar component(s) for settings and status indicator */}
+			<div className="flex-1/5 w-full h-full p-4 justify-items-center items-start">
+				<div>Settings - TBD</div>
 			</div>
 		</div>
 	);
