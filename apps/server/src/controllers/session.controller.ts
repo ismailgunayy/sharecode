@@ -41,11 +41,12 @@ class SessionController {
 
 	create: TController = async (_req, res) => {
 		const sessionID = uuid();
+		const now = new Date();
 
 		const session: TSession = {
 			id: sessionID,
-			createdAt: new Date(),
-			updatedAt: null,
+			createdAt: now,
+			updatedAt: now,
 			data: "",
 			language: "typescript"
 		};

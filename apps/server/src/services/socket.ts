@@ -16,8 +16,6 @@ class SocketService {
 		});
 
 		this.server.on("connection", (socket) => {
-			const { id } = socket;
-
 			socket.on("create room", (sessionID) => {
 				socket.join(sessionID);
 			});
@@ -27,11 +25,13 @@ class SocketService {
 					const response = await this.cacheService.get(sessionID);
 
 					if (response) {
-						const session: TSession = JSON.parse(response);
-						await this.cacheService.set(
-							sessionID,
-							JSON.stringify({ ...session, data })
-						);
+						const session: TSession = {
+							...JSON.parse(response),
+							data,
+							updatedAt: new Date()
+						};
+
+						await this.cacheService.set(sessionID, JSON.stringify(session));
 
 						this.server.to(sessionID).emit("update", data);
 					}
@@ -40,9 +40,7 @@ class SocketService {
 				}
 			});
 
-			socket.on("disconnect", () => {
-				console.log(`disconnect ${id}`);
-			});
+			socket.on("disconnect", () => {});
 		});
 	}
 }
