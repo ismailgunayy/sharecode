@@ -21,7 +21,7 @@
 			"request": "launch",
 			"runtimeArgs": ["dev:server"],
 			"runtimeExecutable": "yarn",
-			"runtimeVersion": "22.12.0",
+			"runtimeVersion": "22.14.0",
 			"skipFiles": ["<node_internals>/**"],
 			"type": "node"
 		},
@@ -33,7 +33,7 @@
 			"request": "launch",
 			"runtimeArgs": ["dev:client"],
 			"runtimeExecutable": "yarn",
-			"runtimeVersion": "22.12.0",
+			"runtimeVersion": "22.14.0",
 			"skipFiles": ["<node_internals>/**"],
 			"type": "node"
 		}
