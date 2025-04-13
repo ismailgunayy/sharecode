@@ -14,7 +14,10 @@
 - [ ] Users in the session are listed
   - [ ] Users are asked a username while joining the session
 
-##### Improvements/Refactors
+##### Fix:
+- [ ] CORS
+
+##### Improvements/Refactors:
 
 - [ ] Add logger (?[Winston](https://github.com/winstonjs/winston)?)
 - [ ] ?Add custom error handler?
