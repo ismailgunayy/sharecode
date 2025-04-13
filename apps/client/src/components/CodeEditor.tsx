@@ -1,7 +1,7 @@
 import * as themes from "@uiw/codemirror-themes-all";
 
 import CodeMirror, { Extension } from "@uiw/react-codemirror";
-import { TLang, TTheme } from "@/types/editor.type";
+import { TLang, TTheme } from "@/types/editor";
 
 import React from "react";
 import clsx from "clsx";

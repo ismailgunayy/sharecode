@@ -1,33 +1,3 @@
-// import "react-dropdown/style.css";
-
-// import Dropdown, { Option } from "react-dropdown";
-
-// import React from "react";
-
-// type TSelectProps = {
-// 	value?: Option;
-// 	options: Option[];
-// 	placeholder?: string;
-// 	onChange: (newValue: Option) => void;
-// };
-
-// const Select = ({
-// 	value,
-// 	options,
-// 	placeholder = "Select an option...",
-// 	onChange
-// }: TSelectProps) => (
-// 	<Dropdown
-// 		className="w-full"
-// 		value={value}
-// 		placeholder={placeholder}
-// 		options={options}
-// 		onChange={onChange}
-// 	/>
-// );
-
-// export default Select;
-
 import { default as ReactSelect, SingleValue } from "react-select";
 
 import React from "react";
@@ -54,11 +24,24 @@ const Select = ({
 	onChange
 }: TSelectProps) => (
 	<ReactSelect
-		className={clsx("w-full", className)}
+		className={className}
 		value={value}
 		placeholder={placeholder}
 		options={options}
 		onChange={onChange}
+		menuShouldScrollIntoView
+		classNames={{
+			control: () =>
+				"!shadow-none !border-0 !outline-0 !cursor-pointer !bg-secondary",
+			singleValue: () => "!text-primary",
+			menu: () => "!bg-secondary",
+			option: ({ isSelected, isFocused }) => {
+				return clsx(
+					"!cursor-pointer !text-primary",
+					(isSelected || isFocused) && "!bg-primary !text-secondary"
+				);
+			}
+		}}
 	/>
 );
 
