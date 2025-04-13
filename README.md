@@ -1,10 +1,7 @@
 <div align="left">
-  <a href="LICENSE">
     <img src="https://img.shields.io/badge/license-MIT-blue.svg?logo=mit" alt="License" />
-  </a>
-  <a href="https://nodejs.org">
+    <img src="https://img.shields.io/badge/Deployment-Railway-blueviolet" alt="License" />
     <img src="https://img.shields.io/badge/node-v22.14.0-44883e?logo=nodedotjs" alt="Node Version" />
-  </a>
 </div>
 
 # ShareCode
@@ -23,7 +20,7 @@ A collaborative code sharing platform that allows developers to share their code
 
 ### Tech Stack
 
-This is a monorepo created with [TurboRepo](https://turbo.build/repo/docs)
+This is a monorepo created with [TurboRepo](https://turbo.build/repo/docs), deployed to [Railway](https://railway.app)
 
 #### Frontend
 
