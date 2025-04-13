@@ -1,6 +1,6 @@
 # ShareCode (Work in Progress)
 
-A collaborative code sharing application that allows developers to create and share their codes in real-time.
+A collaborative code sharing platform that allows developers to create and share their codes in real-time.
 
 ## Features
 
@@ -18,6 +18,7 @@ This is a monorepo created with [TurboRepo](https://turbo.build/repo/docs)
 ## Getting Started
 
 #### Requirements
+
 - Node.js v22.12.0
 - Yarn v1.22.22
 
