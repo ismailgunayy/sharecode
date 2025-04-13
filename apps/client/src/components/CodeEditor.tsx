@@ -1,58 +1,47 @@
-import { ReactNode } from "react";
-import dynamic from "next/dynamic";
+import * as themes from "@uiw/codemirror-themes-all";
 
-interface ICodeEditorProps {
+import CodeMirror, { Extension } from "@uiw/react-codemirror";
+import { TLang, TTheme } from "@/types/editor.type";
+
+import React from "react";
+import clsx from "clsx";
+import { loadLanguage } from "@uiw/codemirror-extensions-langs";
+
+type TCodeEditorProps = {
 	code: string;
-	theme: string;
-	statusIndicator: ReactNode;
+	theme: TTheme;
+	language?: TLang;
+	className?: string;
 	onChange: (value: string) => void;
-}
-
-const AceEditor = dynamic(
-	async () => {
-		const ace = await import("react-ace");
-
-		await import("ace-builds/src-noconflict/mode-typescript");
-		await import("ace-builds/src-noconflict/theme-monokai");
-		await import("ace-builds/src-noconflict/ext-language_tools");
-		return ace;
-	},
-	{ ssr: false }
-);
-
-const CodeEditor = ({
-	code,
-	theme,
-	statusIndicator,
-	onChange
-}: ICodeEditorProps) => {
-	return (
-		<div className="relative w-full h-full">
-			<AceEditor
-				width="100%"
-				height="100%"
-				value={code}
-				focus={true}
-				onChange={onChange}
-				mode="typescript"
-				theme={theme}
-				setOptions={{
-					cursorStyle: "smooth",
-					enableMultiselect: true,
-					fadeFoldWidgets: true,
-					foldStyle: "markbegin",
-					fontSize: 13,
-					highlightSelectedWord: true,
-					printMargin: false,
-					showFoldWidgets: true,
-					showLineNumbers: true,
-					tabSize: 2,
-					wrap: true
-				}}
-			/>
-			<div className="absolute top-4 right-3">{statusIndicator}</div>
-		</div>
-	);
 };
 
+function CodeEditor({
+	code,
+	theme,
+	language,
+	className,
+	onChange
+}: TCodeEditorProps) {
+	const editorTheme = themes[theme] as
+		| Extension
+		| "light"
+		| "dark"
+		| "none"
+		| undefined;
+	const languageExtension = language
+		? [loadLanguage(language) as Extension]
+		: [];
+
+	return (
+		<CodeMirror
+			value={code}
+			theme={editorTheme}
+			className={clsx(className)}
+			width="100%"
+			height="100vh"
+			extensions={languageExtension}
+			onChange={onChange}
+		/>
+	);
+}
 export default CodeEditor;

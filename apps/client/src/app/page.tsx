@@ -41,7 +41,6 @@ export default function Home() {
 			>
 				Create a session
 			</Button>
-			<h5 className="opacity-50 italic">and share the link</h5>
 			<div className="absolute bottom-0 flex mx-auto mb-2">
 				<Link
 					href="https://github.com/ismailgunayy/sharecode"

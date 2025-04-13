@@ -26,12 +26,9 @@ export default function RootLayout({
 				<Toaster
 					position="bottom-right"
 					toastOptions={{
-						duration: 8000,
+						duration: 4000,
 						removeDelay: 1000,
-						style: {
-							background: "#363636",
-							color: "#fff"
-						}
+						className: "!bg-secondary !text-primary !p-2 !pl-4 !text-xl"
 					}}
 				/>
 				{children}
