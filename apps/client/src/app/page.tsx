@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import LinkedIn from "@/assets/icons/LinkedIn";
 import ShareCode from "@/assets/icons/ShareCode.png";
+import clsx from "clsx";
 import { createSession } from "@/service/api/session";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -34,23 +35,37 @@ export default function Home() {
 			/>
 			<h1 className="text-6xl mb-8">ShareCode</h1>
 			<Button
+				className="mb-2"
 				isLoading={isLoading}
 				onClick={createNewSession}
 			>
 				Create a session
 			</Button>
-			<div className="absolute bottom-0 opacity-75 flex mx-auto mb-2">
+			<h5 className="opacity-50 italic">and share the link</h5>
+			<div className="absolute bottom-0 flex mx-auto mb-2">
 				<Link
 					href="https://github.com/ismailgunayy/sharecode"
 					target="_blank"
 				>
-					<GitHub className="text-primary size-12 transition rounded-lg p-2 hover:text-secondary hover:bg-primary" />
+					<GitHub
+						className={clsx(
+							"size-12 transition rounded-lg p-2",
+							"text-secondary",
+							"hover:text-primary hover:bg-secondary"
+						)}
+					/>
 				</Link>
 				<Link
 					href="https://linkedin.com/in/ismailgunayy"
 					target="_blank"
 				>
-					<LinkedIn className="text-primary size-12 transition rounded-lg p-2 hover:text-secondary hover:bg-primary" />
+					<LinkedIn
+						className={clsx(
+							"size-12 transition rounded-lg p-2",
+							"text-secondary",
+							"hover:text-primary hover:bg-secondary"
+						)}
+					/>
 				</Link>
 			</div>
 			<div className="absolute bottom-4 right-4 select-none"></div>

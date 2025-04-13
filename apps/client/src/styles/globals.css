@@ -3,7 +3,7 @@
 @theme {
 	--font-sans: var(--font-geist-sans);
 	--font-mono: var(--font-geist-mono);
-	--color-primary: #ecdfcc;
+	--color-primary: #fff7f2;
 	--color-secondary: #1e201e;
 
 	--animate-fade-in: custom-fade-in 2.3s ease-in-out forwards;
@@ -26,21 +26,16 @@
 	}
 }
 
-:root {
-	--background: #fff7f3;
-	--foreground: #232323;
-}
-
 @media (prefers-color-scheme: dark) {
 	:root {
-		--background: #1e201e;
-		--foreground: #ecdfcc;
+		--color-primary: #1e201e;
+		--color-secondary: #ecdfcc;
 	}
 }
 
 body {
-	color: var(--foreground);
-	background: var(--background);
+	color: var(--color-secondary);
+	background: var(--color-primary);
 	width: 100vw;
 	height: 100vh;
 }

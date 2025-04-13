@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 
 import CodeEditor from "@/components/CodeEditor";
+import clsx from "clsx";
 import debounce from "@/helpers/debounce";
 import { getSession } from "@/service/api/session";
 import toast from "react-hot-toast";
@@ -84,9 +85,10 @@ export default function ShareCode() {
 				theme={theme.value}
 				statusIndicator={
 					<div
-						className={`inline-block w-6 h-6 rounded-full mr-1 ${
+						className={clsx(
+							"inline-block w-6 h-6 rounded-full mr-1 transition-custom",
 							isConnected ? "bg-green-500 animate-custom-pulse" : "bg-red-500"
-						} transition-custom`}
+						)}
 					/>
 				}
 				onChange={handleChange}
