@@ -1,7 +1,6 @@
 import CacheService from "./cache.js";
 import { Server } from "socket.io";
 import { TSession } from "../types/common.type.js";
-import config from "../config/index.js";
 
 class SocketService {
 	public server: Server;
@@ -11,7 +10,7 @@ class SocketService {
 		this.cacheService = cacheService;
 		this.server = new Server({
 			cors: {
-				origin: config.CLIENT_URL
+				origin: "*"
 			}
 		});
 
