@@ -1,6 +1,7 @@
 import express, { Router } from "express";
 import http, { Server } from "http";
 
+import config from "../config/index.js";
 import cors from "cors";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
@@ -14,7 +15,7 @@ class HTTPService {
 		this.app.use(helmet());
 		this.app.use(
 			cors({
-				origin: "*"
+				origin: config.CLIENT_URL
 			})
 		);
 		this.app.use(
