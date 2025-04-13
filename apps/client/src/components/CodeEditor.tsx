@@ -38,8 +38,6 @@ const CodeEditor = ({
 				theme={theme}
 				setOptions={{
 					cursorStyle: "smooth",
-					enableBasicAutocompletion: true,
-					enableLiveAutocompletion: true,
 					enableMultiselect: true,
 					fadeFoldWidgets: true,
 					foldStyle: "markbegin",
