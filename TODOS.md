@@ -13,12 +13,17 @@
 - [ ] Users should be able to see each other's caret positions and selected texts
 - [ ] Users in the session are listed
   - [ ] Users are asked a username while joining the session
+- [ ] Set the UI theme according the editor theme
 
 ##### Fix:
-- [ ] CORS
+
+- [ ] Language choice should be binded to the session
+  - If one of the users change the language, all editors should be synced
+- [x] CORS
 
 ##### Improvements/Refactors:
 
+- [ ] Global state management
 - [ ] Add logger (?[Winston](https://github.com/winstonjs/winston)?)
 - [ ] ?Add custom error handler?
 - [ ] Optimise Dockerfiles and compose files (both prod and dev)
