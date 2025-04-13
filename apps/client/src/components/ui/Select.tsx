@@ -33,14 +33,16 @@ const Select = ({
 		classNames={{
 			control: () =>
 				"!shadow-none !border-0 !outline-0 !cursor-pointer !bg-secondary",
-			singleValue: () => "!text-primary",
+			dropdownIndicator: () => "!text-primary",
+			indicatorSeparator: () => "!bg-primary",
 			menu: () => "!bg-secondary",
 			option: ({ isSelected, isFocused }) => {
 				return clsx(
 					"!cursor-pointer !text-primary",
 					(isSelected || isFocused) && "!bg-primary !text-secondary"
 				);
-			}
+			},
+			singleValue: () => "!text-primary"
 		}}
 	/>
 );
