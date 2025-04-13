@@ -53,7 +53,7 @@ export default function ShareCode() {
 				router.push("/");
 			}
 		})();
-	}, [sessionID, router, isConnected, socket]);
+	}, [sessionID, router]);
 
 	useEffect(() => {
 		socket.on("update", (update) => {
