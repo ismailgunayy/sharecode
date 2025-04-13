@@ -1,35 +1,20 @@
 "use client";
 
-import * as themes from "@uiw/codemirror-themes-all";
-
-import Select, { TOption } from "@/components/ui/Select";
-import { TLang, TTheme } from "@/types/editor.type";
+import { TLang, TTheme } from "@/types/editor";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 
-import Button from "@/components/ui/Button";
 import CodeEditor from "@/components/CodeEditor";
+import Sidebar from "@/components/Sidebar";
 import { SingleValue } from "react-select";
+import { TOption } from "@/components/ui/Select";
 import clsx from "clsx";
 import debounce from "@/helpers/debounce";
+import editorLanguageOptions from "@/data/languages";
+import editorThemeOptions from "@/data/themes";
 import { getSession } from "@/service/api/session";
-import { langs } from "@uiw/codemirror-extensions-langs";
-import prepareOptions from "@/helpers/prepareOptions";
 import toast from "react-hot-toast";
 import useSocket from "@/hooks/useSocket";
-
-const languageOptions = prepareOptions(Object.keys(langs));
-const themeOptions = prepareOptions(
-	Object.keys(themes).filter((theme) => {
-		theme = theme.toLowerCase();
-		return (
-			!theme.includes("default") &&
-			!theme.includes("settings") &&
-			!theme.includes("style") &&
-			!theme.includes("init")
-		);
-	})
-);
 
 export default function ShareCode() {
 	const router = useRouter();
@@ -39,9 +24,8 @@ export default function ShareCode() {
 	const { socket, isConnected } = useSocket(sessionID);
 	const [code, setCode] = useState("");
 
-	// TODO: Manage these with global state
-	const [language, setLanguage] = useState<TLang>();
-	const [theme, setTheme] = useState<TTheme>("monokai");
+	const [language, setLanguage] = useState<TLang>("javascript");
+	const [theme, setTheme] = useState<TTheme>("xcodeDark");
 
 	useEffect(() => {
 		(async () => {
@@ -88,7 +72,7 @@ export default function ShareCode() {
 		setTheme(option?.value as TTheme);
 
 	return (
-		<div className="flex justify-center items-center h-full">
+		<div className="flex justify-center items-center h-full animate-fade-in">
 			<div className="relative flex-4/5 h-full">
 				<CodeEditor
 					code={code}
@@ -105,31 +89,15 @@ export default function ShareCode() {
 					/>
 				</div>
 			</div>
-			{/* // TODO: Implement Sidebar component(s) for settings and status indicator */}
-			<div className="flex-1/5 w-full h-full p-4 items-start">
-				<div className="w-fit mx-auto mb-4">
-					<Button onClick={handleCopyURL}>Copy to Share!</Button>
-				</div>
-				<h2 className="text-2xl w-full text-center mb-4 pb-1 border-b">
-					Settings
-				</h2>
-				<h3 className="mb-1">Language</h3>
-				<Select
-					value={languageOptions.find((option) => option.value === language)}
-					placeholder="Choose a language..."
-					options={languageOptions}
-					onChange={handleLanguageChange}
-					className="mb-4"
-				/>
-				<h3 className="mb-1">Theme</h3>
-				<Select
-					value={themeOptions.find((option) => option.value === theme)}
-					placeholder="Choose a theme..."
-					options={themeOptions}
-					onChange={handleThemeChange}
-					className="mb-4"
-				/>
-			</div>
+			<Sidebar
+				selectedLanguage={language}
+				languageOptions={editorLanguageOptions}
+				selectedTheme={theme}
+				themeOptions={editorThemeOptions}
+				handleCopyURL={handleCopyURL}
+				handleLanguageChange={handleLanguageChange}
+				handleThemeChange={handleThemeChange}
+			/>
 		</div>
 	);
 }
