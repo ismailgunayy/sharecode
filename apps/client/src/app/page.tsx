@@ -13,6 +13,7 @@ import { useState } from "react";
 
 export default function Home() {
 	const [isLoading, setIsLoading] = useState(false);
+	const [isFadingOut, setIsFadingOut] = useState(false);
 
 	const router = useRouter();
 
@@ -21,17 +22,25 @@ export default function Home() {
 		const data = await createSession();
 		setIsLoading(false);
 
+		setIsFadingOut(true);
 		if (data?.id) {
-			router.push(`/${data.id}`);
+			setTimeout(() => {
+				router.push(`/${data.id}`);
+			}, 1230); // Update this time if you change the animate-fade-out duration
 		}
 	};
 
 	return (
-		<div className="flex flex-col justify-center items-center h-full">
+		<div
+			className={clsx(
+				"flex flex-col justify-center items-center h-full select-none animate-fade-in",
+				isFadingOut && "animate-fade-out"
+			)}
+		>
 			<Image
 				src={ShareCode}
 				alt="sharecode-icon"
-				className="absolute top-8 size-32"
+				className="absolute top-8 size-32 hover:rotate-12 transition"
 			/>
 			<h1 className="text-6xl mb-8">ShareCode</h1>
 			<Button
