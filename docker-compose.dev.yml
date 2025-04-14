@@ -28,8 +28,12 @@ services:
       - 3023:3023
 
   redis:
+    container_name: sharecode-redis-dev
     image: redis:7.2
     restart: always
+    volumes:
+      - ./apps/server/redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
     ports:
       - 6379:6379
 

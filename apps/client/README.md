@@ -1,6 +1,7 @@
-### Env
+Create `.env` file in `apps/client`
 
 ```bash
-API_URL=...
-WS_SERVER_URL=...
+# .env
+API_URL=http://localhost:8023/api
+WS_SERVER_URL=ws://localhost:8023
 ```

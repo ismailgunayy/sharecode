@@ -1,11 +1,19 @@
-### Env
+Create `.env` and `redis.conf` files in `apps/server`
 
 ```bash
+# .env
 NODE_ENV=development
-PORT=...
-CLIENT_ORIGIN=...
+PORT=8023
+CLIENT_ORIGIN=http://localhost:3023
 
-# Redis
-REDIS_HOST=...
-REDIS_PORT=...
+REDIS_HOST=redis
+REDIS_PORT=6379
+REDIS_PASSWORD=password
+```
+
+```bash
+# redis.conf
+requirepass password
+port 6379
+bind 0.0.0.0
 ```

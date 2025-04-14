@@ -8,7 +8,8 @@ const CLIENT_URL = process.env.CLIENT_ORIGIN || "http://localhost:3023";
 
 const REDIS_HOST = process.env.REDIS_HOST || "redis";
 const REDIS_PORT = process.env.REDIS_PORT || 6379;
-const REDIS_URL = `redis://${REDIS_HOST}:${REDIS_PORT}`;
+const REDIS_PASSWORD = process.env.REDIS_PASSWORD || "";
+const REDIS_URL = `redis://:${REDIS_PASSWORD}@${REDIS_HOST}:${REDIS_PORT}`;
 
 const config = {
 	NODE_ENV,

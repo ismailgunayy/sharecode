@@ -46,6 +46,8 @@ This is a monorepo created with [TurboRepo](https://turbo.build/repo/docs), depl
 
 #### Local Development
 
+> First, see apps' own READMEs for local files
+
 ```bash
 # Clone the repository
 git clone https://github.com/yourusername/sharecode.git
@@ -61,7 +63,7 @@ yarn
 yarn dev
 ```
 
-#### Docker Development
+##### Docker
 
 ```bash
 # Start the development environment
