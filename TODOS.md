@@ -29,4 +29,4 @@
 - [ ] Add logger (?[Winston](https://github.com/winstonjs/winston)?)
 - [ ] ?Add custom error handler?
 - [ ] Optimise Dockerfiles and compose files (both prod and dev)
-- [x] Use rooms to implement sessions
+- [x] Use socket.io rooms to implement sessions
