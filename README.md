@@ -12,11 +12,11 @@ A collaborative code sharing platform that allows developers to share their code
 
 ### Features
 
-- Real-time code sharing with Socket.IO
+- Real-time code sharing with [Socket.IO](https://socket.io/)
 - Shareable session links for easy collaboration
-- Code editor with syntax highlighting and auto-completion
-- Minimalist, clean interface built with TailwindCSS
-- Redis-backed session storage
+- Code editor with syntax highlighting, powered by [Codemirror](https://uiwjs.github.io/react-codemirror/)
+- Minimalist, clean interface built with [TailwindCSS](https://tailwindcss.com/)
+- [Redis](https://redis.io/)-backed session storage
 
 ### Tech Stack
 
@@ -41,19 +41,15 @@ This is a monorepo created with [TurboRepo](https://turbo.build/repo/docs), depl
 #### Requirements
 
 - Node.js v22.14.0
-- Yarn v1.22.22
+- Yarn
 - Docker & Docker Compose (optional)
 
 #### Local Development
 
-> First, see apps' own READMEs for local files
+First, see apps' own READMEs for local files, then;
 
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/sharecode.git
-cd sharecode
-
-# If you don't have yarn 1.22
+# If you don't have yarn
 corepack enable
 
 # Install dependencies
