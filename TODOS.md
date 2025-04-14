@@ -12,8 +12,10 @@
 - [ ] Sessions will be accessible for 24 hours
 - [ ] Users should be able to see each other's caret positions and selected texts
 - [ ] Users in the session are listed
-  - [ ] Users are asked a username while joining the session
+  - Users are asked a username while joining the session
 - [ ] Set the UI theme according the editor theme
+- [ ] Import/export code as a file
+  - [ ] While importing, file extension is checked and editor language is set accordingly
 
 ##### Fix:
 
