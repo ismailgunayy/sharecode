@@ -12,7 +12,6 @@ const Button = ({ className, isLoading, ...props }: TButtonProps) => {
 				"w-fit border-2 rounded-lg p-4 text-xl cursor-pointer transition",
 				"bg-primary text-secondary",
 				"hover:bg-secondary hover:text-primary",
-				"disabled:cursor-not-allowed",
 				isLoading && "animate-pulse",
 				className
 			)}

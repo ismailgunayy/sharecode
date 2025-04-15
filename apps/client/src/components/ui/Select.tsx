@@ -29,12 +29,12 @@ const Select = ({
 		placeholder={placeholder}
 		options={options}
 		onChange={onChange}
-		menuShouldScrollIntoView
 		classNames={{
 			control: () =>
 				"!shadow-none !border-0 !outline-0 !cursor-pointer !bg-secondary",
 			dropdownIndicator: () => "!text-primary",
 			indicatorSeparator: () => "!bg-primary",
+			input: () => "!text-primary",
 			menu: () => "!bg-secondary",
 			option: ({ isSelected, isFocused }) => {
 				return clsx(
