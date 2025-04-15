@@ -1,4 +1,4 @@
-### Features:
+#### Features:
 
 - [x] Set up the server and client
 - [x] Set up the first connection
@@ -17,14 +17,14 @@
 - [ ] Import/export code as a file
   - [ ] While importing, file extension is checked and editor language is set accordingly
 
-##### Fix:
+#### Bugs:
 
 - [x] Language choice should be binded to the session
   - If one of the users change the language, all editors should be synced
 - [x] In editor, text is not wrapping and shifting sidebar, editor should have a max-width
 - [x] CORS
 
-##### Improvements/Refactors:
+#### Improvements/Refactors:
 
 - [ ] Add request timeout for client, render a toast accordingly
 - [ ] Add a shared types library (Socket events, languages, themes)
