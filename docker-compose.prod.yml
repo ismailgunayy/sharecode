@@ -1,4 +1,14 @@
 services:
+  redis:
+    container_name: sharecode-redis
+    image: redis:7.2-alpine
+    restart: always
+    volumes:
+      - ./apps/server/redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+    ports:
+      - 6379:6379
+
   server:
     container_name: sharecode-server
     command: yarn start:server
@@ -20,9 +30,3 @@ services:
     restart: always
     ports:
       - 3023:3023
-
-  redis:
-    image: redis:7.2
-    restart: always
-    ports:
-      - 6379:6379
