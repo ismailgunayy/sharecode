@@ -9,7 +9,7 @@
   - Users should be able to share the session via links
 - [x] Add a 'copy to share' button to copy URL (For UX purposes)
 - [ ] List recent sessions on homepage
-- [ ] Sessions will be accessible for 24 hours
+- [ ] Sessions will be expire after 24 hours
 - [ ] Users should be able to see each other's caret positions and selected texts
 - [ ] Users in the session are listed
   - Users are asked a username while joining the session
@@ -19,13 +19,14 @@
 
 ##### Fix:
 
-- [ ] Text is not wrapping and shifting sidebar, editor should have a max-width
 - [ ] Language choice should be binded to the session
   - If one of the users change the language, all editors should be synced
+- [x] In editor, text is not wrapping and shifting sidebar, editor should have a max-width
 - [x] CORS
 
 ##### Improvements/Refactors:
 
+- [ ] Add unit, integration, e2e tests
 - [ ] Global state management
 - [ ] Add logger (?[Winston](https://github.com/winstonjs/winston)?)
 - [ ] ?Add custom error handler?

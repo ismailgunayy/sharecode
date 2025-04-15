@@ -1,6 +1,6 @@
 import * as themes from "@uiw/codemirror-themes-all";
 
-import CodeMirror, { Extension } from "@uiw/react-codemirror";
+import CodeMirror, { EditorView, Extension } from "@uiw/react-codemirror";
 import { TLang, TTheme } from "@/types/editor";
 
 import React from "react";
@@ -22,24 +22,17 @@ function CodeEditor({
 	className,
 	onChange
 }: TCodeEditorProps) {
-	const editorTheme = themes[theme] as
-		| Extension
-		| "light"
-		| "dark"
-		| "none"
-		| undefined;
-	const languageExtension = language
-		? [loadLanguage(language) as Extension]
-		: [];
-
 	return (
 		<CodeMirror
-			value={code}
-			theme={editorTheme}
 			className={clsx(className)}
+			value={code}
+			theme={themes[theme]}
 			width="100%"
 			height="100vh"
-			extensions={languageExtension}
+			extensions={[
+				...(language ? [loadLanguage(language) as Extension] : []),
+				EditorView.lineWrapping
+			]}
 			onChange={onChange}
 		/>
 	);
