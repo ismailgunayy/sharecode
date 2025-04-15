@@ -12,11 +12,11 @@ A collaborative code sharing platform that allows developers to share their code
 
 ### Features
 
-- Real-time code sharing with [Socket.IO](https://socket.io/)
+- Real-time code sharing with Socket.IO
 - Shareable session links for easy collaboration
-- Code editor with syntax highlighting, powered by [Codemirror](https://uiwjs.github.io/react-codemirror/)
-- Minimalist, clean interface built with [TailwindCSS](https://tailwindcss.com/)
-- [Redis](https://redis.io/)-backed session storage
+- Code editor with syntax highlighting, powered by Codemirror
+- Minimalist, clean interface built with TailwindCSS
+- Redis-backed session storage
 
 ### Tech Stack
 
@@ -24,17 +24,18 @@ This is a monorepo created with [TurboRepo](https://turbo.build/repo/docs), depl
 
 #### Frontend
 
-- Next.js
-- React
-- TailwindCSS
-- Socket.IO-Client
+- [React](https://react.dev/)
+- [Next.js](https://nextjs.org/)
+- [Socket.IO-Client](https://socket.io/docs/v4/client-api/)
+- [Codemirror](https://uiwjs.github.io/react-codemirror/)
+- [TailwindCSS](https://tailwindcss.com/)
 
 #### Backend
 
-- Node.js
-- Express
-- Socket.IO
-- Redis
+- [Node.js](https://nodejs.org/)
+- [Express](https://expressjs.com/)
+- [Socket.IO](https://socket.io/)
+- [Redis](https://redis.io/)
 
 ### Getting Started
 
