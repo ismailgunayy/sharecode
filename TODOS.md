@@ -26,6 +26,7 @@
 
 ##### Improvements/Refactors:
 
+- [ ] Add a shared types library (Socket events, languages, themes)
 - [ ] Add unit, integration, e2e tests
 - [ ] Global state management
 - [ ] Add logger (?[Winston](https://github.com/winstonjs/winston)?)
