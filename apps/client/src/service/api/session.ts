@@ -1,4 +1,5 @@
 import ENDPOINTS from "@/common/endpoints";
+import { TLang } from "@/types/editor";
 import api from ".";
 
 type TSession = {
@@ -6,7 +7,7 @@ type TSession = {
 	createdAt: Date;
 	updatedAt: Date | null;
 	data: string;
-	language: string;
+	language: TLang;
 };
 
 export const getSession = async (

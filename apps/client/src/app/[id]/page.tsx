@@ -33,7 +33,7 @@ export default function ShareCode() {
 
 			if (session) {
 				setCode(session.data);
-				setLanguage(session.language as TLang);
+				setLanguage(session.language);
 			} else {
 				toast.error("Session not found", { id: "session-not-found" });
 				router.push("/");
