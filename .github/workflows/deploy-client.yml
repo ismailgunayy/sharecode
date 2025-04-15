@@ -7,7 +7,7 @@ on:
 
 jobs:
   check-types:
-    name: Check Types
+    name: check-types
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -17,15 +17,26 @@ jobs:
         with:
           node-version-file: ".nvmrc"
 
+      - name: Cache node_modules
+        uses: actions/cache@v4.2.3
+        id: yarn-cache
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
       - name: Install dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn workspace client install
 
       - name: Check Types
         run: yarn workspace client check-types
 
   lint:
-    name: Lint Code
+    name: lint
     runs-on: ubuntu-latest
+    needs: check-types
     steps:
       - uses: actions/checkout@v3
 
@@ -34,16 +45,26 @@ jobs:
         with:
           node-version-file: ".nvmrc"
 
+      - name: Cache node_modules
+        uses: actions/cache@v4.2.3
+        id: yarn-cache
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
       - name: Install dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn workspace client install
 
-      - name: Run Linter
+      - name: Lint Code
         run: yarn workspace client lint
 
   deploy:
-    name: Deploy
+    name: deploy
     runs-on: ubuntu-latest
-    needs: [check-types, lint]
+    needs: lint
     container: ghcr.io/railwayapp/cli:latest
     environment: production
     env:
@@ -51,4 +72,5 @@ jobs:
       RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
     steps:
       - uses: actions/checkout@v3
+
       - run: railway up --service=${{ env.SVC_ID }}

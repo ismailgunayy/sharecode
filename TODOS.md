@@ -26,6 +26,7 @@
 
 ##### Improvements/Refactors:
 
+- [ ] Add request timeout for client, render a toast accordingly
 - [ ] Add a shared types library (Socket events, languages, themes)
 - [ ] Add unit, integration, e2e tests
 - [ ] Global state management
