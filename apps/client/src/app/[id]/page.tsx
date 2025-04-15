@@ -30,8 +30,10 @@ export default function ShareCode() {
 	useEffect(() => {
 		(async () => {
 			const session = await getSession(sessionID);
+
 			if (session) {
 				setCode(session.data);
+				setLanguage(session.language as TLang);
 			} else {
 				toast.error("Session not found", { id: "session-not-found" });
 				router.push("/");
@@ -43,16 +45,11 @@ export default function ShareCode() {
 		socket.on("update", (update) => {
 			setCode(update);
 		});
-	}, [socket, sessionID]);
 
-	const handleCodeChange = debounce(
-		(data: string) => {
-			setCode(data);
-			socket.emit("update", { sessionID, data });
-		},
-		250,
-		1000
-	);
+		socket.on("language", (lang) => {
+			setLanguage(lang);
+		});
+	}, [socket, sessionID]);
 
 	const handleCopyURL = async () => {
 		const type = "text/plain";
@@ -65,11 +62,27 @@ export default function ShareCode() {
 		toast.success("Copied the session URL", { id: "copied-session-url" });
 	};
 
-	const handleLanguageChange = (option: SingleValue<TOption>) =>
-		setLanguage(option?.value as TLang);
+	const handleCodeChange = debounce(
+		(data: string) => {
+			setCode(data);
+			socket.emit("update", { sessionID, data });
+		},
+		150,
+		1000
+	);
 
-	const handleThemeChange = (option: SingleValue<TOption>) =>
-		setTheme(option?.value as TTheme);
+	const handleLanguageChange = (option: SingleValue<TOption>) => {
+		if (!option) return;
+
+		setLanguage(option.value as TLang);
+		socket.emit("language", { sessionID, language: option.value });
+	};
+
+	const handleThemeChange = (option: SingleValue<TOption>) => {
+		if (!option) return;
+
+		setTheme(option.value as TTheme);
+	};
 
 	return (
 		<div className="flex justify-center items-center h-full animate-fade-in">

@@ -16,7 +16,7 @@ class SocketService {
 		});
 
 		this.server.on("connection", (socket) => {
-			socket.on("create room", (sessionID) => {
+			socket.on("create session", (sessionID) => {
 				socket.join(sessionID);
 			});
 
@@ -32,11 +32,28 @@ class SocketService {
 						};
 
 						await this.cacheService.set(sessionID, JSON.stringify(session));
-
 						this.server.to(sessionID).emit("update", data);
 					}
-				} catch {
-					console.error("Couldn't update and publish the data");
+				} catch (error) {
+					console.error("Couldn't update and publish data", error);
+				}
+			});
+
+			socket.on("language", async ({ sessionID, language }) => {
+				try {
+					const response = await this.cacheService.get(sessionID);
+
+					if (response) {
+						const session: TSession = {
+							...JSON.parse(response),
+							language
+						};
+
+						await this.cacheService.set(sessionID, JSON.stringify(session));
+						this.server.to(sessionID).emit("language", language);
+					}
+				} catch (error) {
+					console.error("Couldn't update and publish language", error);
 				}
 			});
 

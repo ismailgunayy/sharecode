@@ -12,7 +12,7 @@ export default function useSocket(sessionID: string) {
 	useEffect(() => {
 		socketRef.current.on("connect", () => {
 			setIsConnected(true);
-			socketRef.current.emit("create room", sessionID);
+			socketRef.current.emit("create session", sessionID);
 		});
 
 		socketRef.current.on("disconnect", () => {
