@@ -1,0 +1,54 @@
+name: deploy-client
+
+on:
+  push:
+    paths: ["apps/client/**", ".github/**"]
+    branches: [master]
+
+jobs:
+  check-types:
+    name: Check Types
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v4.4.0
+        with:
+          node-version-file: ".nvmrc"
+
+      - name: Install dependencies
+        run: yarn workspace client install
+
+      - name: Check Types
+        run: yarn workspace client check-types
+
+  lint:
+    name: Lint Code
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v4.4.0
+        with:
+          node-version-file: ".nvmrc"
+
+      - name: Install dependencies
+        run: yarn workspace client install
+
+      - name: Run Linter
+        run: yarn workspace client lint
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: [check-types, lint]
+    container: ghcr.io/railwayapp/cli:latest
+    environment: production
+    env:
+      SVC_ID: ${{ vars.RAILWAY_CLIENT_SERVICE_ID }}
+      RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+      - run: railway up --service=${{ env.SVC_ID }}
