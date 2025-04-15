@@ -19,7 +19,7 @@
 
 ##### Fix:
 
-- [ ] Language choice should be binded to the session
+- [x] Language choice should be binded to the session
   - If one of the users change the language, all editors should be synced
 - [x] In editor, text is not wrapping and shifting sidebar, editor should have a max-width
 - [x] CORS
