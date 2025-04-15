@@ -1,6 +1,6 @@
 <div align="left">
     <img src="https://img.shields.io/badge/license-MIT-blue.svg?logo=mit" alt="License" />
-    <img src="https://img.shields.io/badge/Deployment-Railway-blueviolet" alt="License" />
+    <img src="https://img.shields.io/badge/Deployment-Railway-blueviolet" alt="Railway" />
     <img src="https://img.shields.io/badge/node-v22.14.0-44883e?logo=nodedotjs" alt="Node Version" />
 </div>
 
@@ -22,7 +22,7 @@ A collaborative code sharing platform that allows developers to share their code
 
 ### Tech Stack
 
-This is a monorepo created with [TurboRepo](https://turbo.build/repo/docs), deployed to [Railway](https://railway.app)
+This is a monorepo created with [TurboRepo](https://turbo.build/repo/docs)
 
 #### Frontend
 
@@ -39,42 +39,53 @@ This is a monorepo created with [TurboRepo](https://turbo.build/repo/docs), depl
 - [Socket.IO](https://socket.io/)
 - [Redis](https://redis.io/)
 
-### Getting Started
+#### CI/CD
+
+- [GitHub Actions](https://github.com/features/actions) workflows for client and server deployments
+- Automated deployments to [Railway.app](https://railway.app)
+- Type checking and linting on push to master
+
+### Getting Started with Docker Setup
 
 #### Requirements
 
 - Node.js v22.14.0
 - Yarn
-- Docker & Docker Compose (optional)
+- Docker
 
-#### Local Development
-
-First, see apps' own READMEs for local files, then;
+Create following files:
 
 ```bash
-# If you don't have yarn
-corepack enable
-
-# Install dependencies
-yarn
-
-# Start development
-yarn dev
+# apps/client/.env
+API_URL=http://localhost:8023/api
+WS_SERVER_URL=ws://localhost:8023
 ```
 
-##### Docker
+```bash
+# apps/server/.env
+NODE_ENV=development
+PORT=8023
+CLIENT_ORIGIN=http://localhost:3023
+
+REDIS_HOST=redis
+REDIS_PORT=6379
+REDIS_PASSWORD=password
+```
 
 ```bash
-# Start the development environment
+# apps/server/redis.conf
+requirepass password
+port 6379
+bind 0.0.0.0
+```
+
+#### Running the development environment
+
+```bash
 docker compose -f docker-compose.dev.yml up
 ```
 
-This will start:
-
-- Client -> `http://localhost:3023`
-- Server -> `http://localhost:8023`
-- WebSocket -> `ws://localhost:8023`
-- Redis -> `redis://localhost:6379`
+Go to [http://localhost:3023](http://localhost:3023)
 
 ## License
 
