@@ -18,6 +18,8 @@ A collaborative code sharing platform that allows developers to share their code
 - Minimalist, clean interface built with TailwindCSS
 - Redis-backed session storage
 
+> See [TODOS.md](./TODOS.md) for further features, bugs, and improvements.
+
 ### Tech Stack
 
 This is a monorepo created with [TurboRepo](https://turbo.build/repo/docs), deployed to [Railway](https://railway.app)
