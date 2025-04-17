@@ -1,10 +1,11 @@
 import CacheService from "./cache.js";
+import { Server as HTTPServer } from "http";
 import { Server } from "socket.io";
 import { TSession } from "../types/common.type.js";
 import config from "../config/index.js";
 
 class SocketService {
-	public server: Server;
+	private server: Server;
 	private cacheService: CacheService;
 
 	public constructor(cacheService: CacheService) {
@@ -14,7 +15,18 @@ class SocketService {
 				origin: config.CLIENT_URL
 			}
 		});
+	}
 
+	public start(server: HTTPServer) {
+		this.server.attach(server);
+		this.setupSocket();
+	}
+
+	public async stop() {
+		await this.server.close();
+	}
+
+	private setupSocket() {
 		this.server.on("connection", (socket) => {
 			socket.on("create session", (sessionID) => {
 				socket.join(sessionID);

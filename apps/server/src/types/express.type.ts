@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 
+import SessionController from "../controllers/session.controller.js";
+
 export type TController = (
 	req: Request,
 	res: Response<{
@@ -9,3 +11,7 @@ export type TController = (
 	}>,
 	next: NextFunction
 ) => Promise<unknown>;
+
+export type TControllers = {
+	session: SessionController;
+};

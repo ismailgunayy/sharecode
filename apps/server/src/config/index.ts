@@ -18,4 +18,5 @@ const config = {
 	REDIS_URL
 };
 
+Object.freeze(config);
 export default config;
