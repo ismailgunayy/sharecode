@@ -1,20 +1,30 @@
-import { cacheService, httpService, socketService } from "./container/index.js";
-
-import config from "./config/index.js";
+import CacheService from "./services/cache.js";
+import HTTPService from "./services/http.js";
+import SessionController from "./controllers/session.controller.js";
+import SocketService from "./services/socket.js";
+import { TControllers } from "./types/express.type.js";
 import mainRouter from "./routes/index.js";
 
-const init = async () => {
-	await cacheService.connect();
+// Services
+const cacheService = new CacheService();
+const httpService = new HTTPService();
+const socketService = new SocketService(cacheService);
 
-	socketService.server.attach(httpService.server);
-	httpService.setup(mainRouter());
-	httpService.server.listen(config.PORT, () => {
-		console.log(`Server listening on port ${config.PORT}`);
-	});
+// Controllers
+const sessionController = new SessionController(cacheService);
+
+const controllers: TControllers = {
+	session: sessionController
+};
+
+const init = async () => {
+	socketService.start(httpService.server);
+	httpService.start(mainRouter(controllers));
 
 	function gracefulShutdown() {
-		socketService.server.close();
-		httpService.server.close();
+		cacheService.stop();
+		socketService.stop();
+		httpService.stop();
 	}
 
 	// TODO: Change with 'satisfies' and look into the 'sort-imports' package

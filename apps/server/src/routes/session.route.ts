@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { controllers } from "../container/index.js";
+import SessionController from "../controllers/session.controller.js";
 
-const sessionRouter = () => {
+const sessionRouter = (controller: SessionController) => {
 	return Router()
-		.get("/:sessionID", controllers.session.get)
-		.post("/", controllers.session.create)
-		.delete("/", controllers.session.delete);
+		.get("/:sessionID", controller.getSession)
+		.post("/", controller.createSession)
+		.delete("/", controller.deleteSession);
 };
 
 export default sessionRouter;

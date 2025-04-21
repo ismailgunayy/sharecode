@@ -10,7 +10,7 @@ class SessionController {
 		this.cacheService = cacheService;
 	}
 
-	get: TController = async (req, res) => {
+	getSession: TController = async (req, res) => {
 		const sessionID = req.params.sessionID;
 
 		if (!sessionID) {
@@ -32,14 +32,16 @@ class SessionController {
 					.status(404)
 					.json({ message: "Session not found", success: false });
 			}
-		} catch {
+		} catch (error) {
+			console.error("Error getting the session:", error);
+
 			return res
 				.status(500)
 				.json({ message: "Internal Server Error", success: false });
 		}
 	};
 
-	create: TController = async (_req, res) => {
+	createSession: TController = async (_req, res) => {
 		const sessionID = uuid();
 		const now = new Date();
 
@@ -59,14 +61,16 @@ class SessionController {
 				success: true,
 				data: session
 			});
-		} catch {
+		} catch (error) {
+			console.error("Error creating the session:", error);
+
 			return res
 				.status(500)
 				.json({ message: "Internal Server Error", success: false });
 		}
 	};
 
-	delete: TController = async (req, res) => {
+	deleteSession: TController = async (req, res) => {
 		const sessionID: string = req.body.sessionID;
 
 		if (!sessionID) {
@@ -77,15 +81,17 @@ class SessionController {
 
 		try {
 			await this.cacheService.del(sessionID);
-		} catch {
+
+			return res
+				.status(200)
+				.json({ message: "Session deleted succesfully", success: true });
+		} catch (error) {
+			console.error("Error deleting the session:", error);
+
 			return res
 				.status(500)
 				.json({ message: "Internal Server Error", success: false });
 		}
-
-		return res
-			.status(200)
-			.json({ message: "Session deleted succesfully", success: true });
 	};
 }
 

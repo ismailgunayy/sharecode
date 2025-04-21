@@ -13,8 +13,12 @@ class CacheService {
 		});
 	}
 
-	public async connect() {
+	public async start() {
 		await this.client.connect();
+	}
+
+	public async stop() {
+		await this.client.disconnect();
 	}
 
 	public async get(key: string): Promise<string | null> {

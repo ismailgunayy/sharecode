@@ -29,8 +29,16 @@ class HTTPService {
 		this.server = http.createServer(this.app);
 	}
 
-	public setup(router: Router) {
+	public start(router: Router) {
 		this.app.use("/api", router);
+
+		this.server.listen(config.PORT, () => {
+			console.log(`HTTP server listening on port ${config.PORT}`);
+		});
+	}
+
+	public stop() {
+		this.server.close();
 	}
 }
 
