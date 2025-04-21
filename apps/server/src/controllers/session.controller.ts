@@ -1,6 +1,6 @@
 import CacheService from "../services/cache.js";
 import { TController } from "../types/express.type.js";
-import { TSession } from "../types/common.type.js";
+import { TSession } from "../types/session.type.js";
 import { v4 as uuid } from "uuid";
 
 class SessionController {
@@ -37,7 +37,7 @@ class SessionController {
 
 			return res
 				.status(500)
-				.json({ message: "Internal Server Error", success: false });
+				.json({ message: "Couldn't get session info", success: false });
 		}
 	};
 
@@ -66,7 +66,7 @@ class SessionController {
 
 			return res
 				.status(500)
-				.json({ message: "Internal Server Error", success: false });
+				.json({ message: "Couldn't create the session", success: false });
 		}
 	};
 
@@ -90,7 +90,7 @@ class SessionController {
 
 			return res
 				.status(500)
-				.json({ message: "Internal Server Error", success: false });
+				.json({ message: "Couldn't delete the session", success: false });
 		}
 	};
 }

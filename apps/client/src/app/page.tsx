@@ -22,8 +22,8 @@ export default function Home() {
 		const data = await createSession();
 		setIsLoading(false);
 
-		setIsFadingOut(true);
 		if (data?.id) {
+			setIsFadingOut(true);
 			setTimeout(() => {
 				router.push(`/${data.id}`);
 			}, 1230); // Update this time if you change the animate-fade-out duration
