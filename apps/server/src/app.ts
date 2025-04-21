@@ -19,6 +19,15 @@ const controllers: TControllers = {
 
 const init = async () => {
 	socketService.start(httpService.server);
+
+	httpService.addMiddleware(async (_req, _res, next) => {
+		if (!cacheService.isConnected()) {
+			await cacheService.start();
+		}
+
+		next();
+	});
+
 	httpService.start(mainRouter(controllers));
 
 	function gracefulShutdown() {

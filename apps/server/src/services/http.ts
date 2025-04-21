@@ -1,4 +1,4 @@
-import express, { Router } from "express";
+import express, { RequestHandler, Router } from "express";
 import http, { Server } from "http";
 
 import config from "../config/index.js";
@@ -39,6 +39,10 @@ class HTTPService {
 
 	public stop() {
 		this.server.close();
+	}
+
+	public addMiddleware(middleware: RequestHandler) {
+		this.app.use(middleware);
 	}
 }
 
