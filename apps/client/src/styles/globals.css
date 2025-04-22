@@ -28,7 +28,7 @@
 		}
 	}
 
-	--animate-custom-pulse: custom-pulse 2s ease-in-out infinite;
+	--animate-custom-pulse: custom-pulse 2.23s ease-in-out infinite;
 	@keyframes custom-pulse {
 		50% {
 			transform: scale(1.23);

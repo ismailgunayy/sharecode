@@ -1,15 +1,7 @@
 import ENDPOINTS from "@/common/endpoints";
 import { TAPIResponse } from "@/types/api";
-import { TLang } from "@/types/editor";
+import { TSession } from "@/types/session";
 import api from ".";
-
-type TSession = {
-	id: string;
-	createdAt: Date;
-	updatedAt: Date | null;
-	data: string;
-	language: TLang;
-};
 
 export const getSession = async (
 	sessionID: string
@@ -20,7 +12,7 @@ export const getSession = async (
 		);
 
 		if (!data.success) {
-			throw new Error("Could not fetch the sesssion");
+			throw new Error("Couldn't get session info");
 		}
 
 		return data.data as TSession;
@@ -34,7 +26,7 @@ export const createSession = async (): Promise<TSession | void> => {
 		const { data } = await api.post<TAPIResponse>(ENDPOINTS.SESSION.CREATE);
 
 		if (!data.success) {
-			throw new Error("Could not create the session");
+			throw new Error("Couldn't create the session");
 		}
 
 		return data.data as TSession;

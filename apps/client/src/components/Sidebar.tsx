@@ -3,8 +3,10 @@ import { TLang, TTheme } from "@/types/editor";
 
 import Button from "./ui/Button";
 import { SingleValue } from "react-select";
+import clsx from "clsx";
 
 type TSidebarProps = {
+	className?: string;
 	selectedLanguage?: TLang;
 	languageOptions: TOption[];
 	selectedTheme: TTheme;
@@ -15,6 +17,7 @@ type TSidebarProps = {
 };
 
 const Sidebar = ({
+	className,
 	selectedLanguage,
 	languageOptions,
 	selectedTheme,
@@ -24,9 +27,14 @@ const Sidebar = ({
 	handleThemeChange
 }: TSidebarProps) => {
 	return (
-		<div className="flex-1/5 w-full h-full p-4 items-start">
+		<div className={clsx("w-full h-full p-4 items-start", className)}>
 			<div className="w-fit mx-auto mb-4">
-				<Button onClick={handleCopyURL}>Copy to Share!</Button>
+				<Button
+					onClick={handleCopyURL}
+					className="!p-4"
+				>
+					Copy to Share!
+				</Button>
 			</div>
 			<h2 className="text-2xl w-full text-center mb-1 text-secondary">
 				Settings

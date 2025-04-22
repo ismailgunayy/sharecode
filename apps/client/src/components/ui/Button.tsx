@@ -5,21 +5,24 @@ type TButtonProps = {
 	isLoading?: boolean;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button = ({ className, isLoading, ...props }: TButtonProps) => {
+const Button = ({ className, isLoading, disabled, ...props }: TButtonProps) => {
 	return (
-		<button
-			className={clsx(
-				"w-fit border-2 rounded-lg p-4 text-xl cursor-pointer transition",
-				"bg-primary text-secondary",
-				"hover:bg-secondary hover:text-primary",
-				isLoading && "animate-pulse",
-				className
-			)}
-			disabled={isLoading}
-			{...props}
-		>
-			{props.children}
-		</button>
+		<div>
+			<button
+				className={clsx(
+					"w-fit border-2 rounded-lg px-4 py-2 text-xl transition",
+					"bg-primary text-secondary",
+					!disabled && "cursor-pointer",
+					!disabled && "hover:bg-secondary hover:text-primary",
+					isLoading && "animate-pulse",
+					className
+				)}
+				disabled={disabled || isLoading}
+				{...props}
+			>
+				{props.children}
+			</button>
+		</div>
 	);
 };
 

@@ -12,6 +12,7 @@ class HTTPService {
 
 	public constructor() {
 		this.app = express();
+		this.app.use(express.json());
 		this.app.use(helmet());
 		this.app.use(
 			cors({

@@ -12,7 +12,7 @@ export default function useSocket(sessionID: string) {
 	useEffect(() => {
 		socketRef.current.on("connect", () => {
 			setIsConnected(true);
-			socketRef.current.emit("create session", sessionID);
+			socketRef.current.emit("join session", sessionID);
 		});
 
 		socketRef.current.on("disconnect", () => {
@@ -20,5 +20,8 @@ export default function useSocket(sessionID: string) {
 		});
 	}, [sessionID]);
 
-	return { socket: socketRef.current, isConnected };
+	return {
+		socket: socketRef.current,
+		isConnected: isConnected || socketRef.current.connected
+	};
 }

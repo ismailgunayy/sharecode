@@ -23,10 +23,13 @@ class SessionController {
 			const response = await this.cacheService.get(sessionID);
 
 			if (response) {
-				const session = JSON.parse(response) as TSession;
-				return res
-					.status(200)
-					.json({ message: "Session found", success: true, data: session });
+				const session: TSession = JSON.parse(response);
+
+				return res.status(200).json({
+					message: "Session found",
+					success: true,
+					data: session
+				});
 			} else {
 				return res
 					.status(404)

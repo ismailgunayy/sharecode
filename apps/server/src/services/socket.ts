@@ -28,7 +28,7 @@ class SocketService {
 
 	private setupSocket() {
 		this.server.on("connection", (socket) => {
-			socket.on("create session", (sessionID) => {
+			socket.on("join session", (sessionID) => {
 				socket.join(sessionID);
 			});
 
@@ -69,7 +69,9 @@ class SocketService {
 				}
 			});
 
-			socket.on("disconnect", () => {});
+			socket.on("disconnect", (test) => {
+				console.log(test);
+			});
 		});
 	}
 }

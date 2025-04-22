@@ -22,8 +22,8 @@ export default function ShareCode() {
 	const sessionID = params.id as string;
 
 	const { socket, isConnected } = useSocket(sessionID);
-	const [code, setCode] = useState("");
 
+	const [code, setCode] = useState("");
 	const [language, setLanguage] = useState<TLang>("javascript");
 	const [theme, setTheme] = useState<TTheme>("xcodeDark");
 
@@ -72,16 +72,16 @@ export default function ShareCode() {
 	);
 
 	const handleLanguageChange = (option: SingleValue<TOption>) => {
-		if (!option) return;
+		setLanguage(option?.value as TLang);
 
-		setLanguage(option.value as TLang);
-		socket.emit("language", { sessionID, language: option.value });
+		socket.emit("language", {
+			sessionID,
+			language: option?.value
+		});
 	};
 
 	const handleThemeChange = (option: SingleValue<TOption>) => {
-		if (!option) return;
-
-		setTheme(option.value as TTheme);
+		setTheme(option?.value as TTheme);
 	};
 
 	return (
@@ -96,13 +96,14 @@ export default function ShareCode() {
 				<div className="absolute top-4 right-3">
 					<div
 						className={clsx(
-							"inline-block w-6 h-6 rounded-full mr-1 transition-custom",
+							"inline-block w-6 h-6 rounded-full mr-1 transition-custom overflow-hidden",
 							isConnected ? "bg-green-500 animate-custom-pulse" : "bg-red-500"
 						)}
 					/>
 				</div>
 			</div>
 			<Sidebar
+				className="flex-1/5"
 				selectedLanguage={language}
 				languageOptions={editorLanguageOptions}
 				selectedTheme={theme}
