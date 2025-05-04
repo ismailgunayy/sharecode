@@ -6,7 +6,7 @@
 	},
 	"deploy": {
 		"healthcheckPath": "/api/health",
-		"healthcheckTimeout": 60,
+		"healthcheckTimeout": 300,
 		"restartPolicyType": "ALWAYS",
 		"sleepApplication": true,
 		"startCommand": "yarn workspace server run start"
