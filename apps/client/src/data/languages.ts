@@ -59,6 +59,10 @@ const editorLanguageOptions = [
 		value: "php"
 	},
 	{
+		label: "Plain Text",
+		value: ""
+	},
+	{
 		label: "Python",
 		value: "python"
 	},

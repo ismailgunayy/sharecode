@@ -24,8 +24,8 @@ export default function ShareCode() {
 	const { socket, isConnected } = useSocket(sessionID);
 
 	const [code, setCode] = useState("");
-	const [language, setLanguage] = useState<TLang>("javascript");
-	const [theme, setTheme] = useState<TTheme>("xcodeDark");
+	const [language, setLanguage] = useState<TLang>("typescript");
+	const [theme, setTheme] = useState<TTheme>("basicDark");
 
 	useEffect(() => {
 		(async () => {
