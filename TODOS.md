@@ -31,7 +31,7 @@
 - [ ] Lazy load themes and languages
 - [ ] Add request timeout for client, render a toast accordingly
 - [ ] Add a shared types library (Socket events, languages, themes)
-- [ ] Add unit, integration, e2e tests
+- [ ] Add unit, integration, e2e tests (Just to practice)
 - [ ] Global state management
 - [ ] Add logger (?[Winston](https://github.com/winstonjs/winston)?)
 - [ ] ?Add custom error handler?
