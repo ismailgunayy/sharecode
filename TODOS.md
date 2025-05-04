@@ -13,14 +13,16 @@
 - [ ] Users should be able to see each other's caret positions
   - Codemirror is able to render a tooltip on a custom position
   - Do further research about highlighting texts by other users
+- [ ] Import/export code as a file
+  - [ ] While importing, file extension is checked and editor language is set accordingly
 - [ ] Users in the session are listed
   - Users are asked a username while joining the session
 - [ ] Set the UI theme according the editor theme
-- [ ] Import/export code as a file
-  - [ ] While importing, file extension is checked and editor language is set accordingly
 
 #### Bugs:
 
+- [ ] Serverless not working properly
+  - Only redis sleeps after 10 minutes of inactivity, client and server are always up
 - [x] Language choice should be binded to the session
   - If one of the users change the language, all editors should be synced
 - [x] In editor, text is not wrapping and shifting sidebar, editor should have a max-width
@@ -28,7 +30,7 @@
 
 #### Improvements/Refactors:
 
-- [ ] Lazy load themes and languages
+- [ ] Implement lazy loading for themes and languages
 - [ ] Add request timeout for client, render a toast accordingly
 - [ ] Add a shared types library (Socket events, languages, themes)
 - [ ] Add unit, integration, e2e tests (Just to practice)

@@ -6,23 +6,22 @@
 
 # ShareCode
 
-A collaborative code sharing platform that allows developers to share their codes in real-time.
+A collaborative tool that allows developers to share their code in real-time.
 
 > ## **[🚀 Try it live now ](https://sharecode.up.railway.app)**
 
 ### Features
 
-- Real-time code sharing with Socket.IO
+- Real-time code sharing
 - Shareable session links for easy collaboration
-- Code editor with syntax highlighting, powered by Codemirror
-- Minimalist, clean interface built with Tailwind
-- Redis-backed session storage
+- Syntax highlighting for multiple programming languages
+- Clean, minimalist interface
 
 > See [TODOS.md](./TODOS.md) for further features, bugs, and improvements.
 
 ### Tech Stack
 
-This is a monorepo created with [TurboRepo](https://turbo.build/repo/docs)
+This is a monorepo built with [TurboRepo](https://turbo.build/repo/docs)
 
 #### Frontend
 
@@ -43,7 +42,6 @@ This is a monorepo created with [TurboRepo](https://turbo.build/repo/docs)
 
 - [GitHub Actions](https://github.com/features/actions) workflows for client and server deployments
 - Automated deployments to [Railway.app](https://railway.app)
-- Type checking and linting on push to master
 
 ### Getting Started with Docker Setup
 
