@@ -34,6 +34,7 @@ function CodeEditor({
 				EditorView.lineWrapping
 			]}
 			onChange={onChange}
+			autoFocus
 		/>
 	);
 }
