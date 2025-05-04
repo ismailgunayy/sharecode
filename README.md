@@ -15,7 +15,7 @@ A collaborative code sharing platform that allows developers to share their code
 - Real-time code sharing with Socket.IO
 - Shareable session links for easy collaboration
 - Code editor with syntax highlighting, powered by Codemirror
-- Minimalist, clean interface built with TailwindCSS
+- Minimalist, clean interface built with Tailwind
 - Redis-backed session storage
 
 > See [TODOS.md](./TODOS.md) for further features, bugs, and improvements.
@@ -30,7 +30,7 @@ This is a monorepo created with [TurboRepo](https://turbo.build/repo/docs)
 - [Next.js](https://nextjs.org/)
 - [Socket.IO-Client](https://socket.io/docs/v4/client-api/)
 - [Codemirror](https://uiwjs.github.io/react-codemirror/)
-- [TailwindCSS](https://tailwindcss.com/)
+- [Tailwind](https://tailwindcss.com/)
 
 #### Backend
 
