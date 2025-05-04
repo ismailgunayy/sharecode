@@ -16,7 +16,7 @@ class CacheService {
 		});
 
 		this.cacheServiceSleepTime =
-			config.CACHE_SERVICE_SLEEP_TIME_MIN * 60 * 1000;
+			config.CACHE_SERVICE_SLEEP_TIME_IN_MINUTES * 60 * 1000;
 	}
 
 	public async start() {
