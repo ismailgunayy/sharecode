@@ -1,4 +1,4 @@
-import express, { RequestHandler, Router } from "express";
+import express, { Express, RequestHandler, Router } from "express";
 import http, { Server } from "http";
 
 import config from "../config/index.js";
@@ -8,7 +8,7 @@ import rateLimit from "express-rate-limit";
 
 class HTTPService {
 	public server: Server;
-	private app; // Express cannot be used as a type
+	private app: Express;
 
 	public constructor() {
 		this.app = express();

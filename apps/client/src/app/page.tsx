@@ -26,7 +26,7 @@ export default function Home() {
 			setIsFadingOut(true);
 			setTimeout(() => {
 				router.push(`/${data.id}`);
-			}, 1230); // Update this time if you change the animate-fade-out duration
+			}, 660); // Update this time if you change the animate-fade-out duration
 		}
 	};
 
