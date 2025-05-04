@@ -10,7 +10,7 @@ export default function NotFound() {
 	useEffect(() => {
 		if (router) {
 			router.replace("/");
-			toast.error("No such page", { id: "page-not-found" });
+			toast.error("Page not found", { id: "page-not-found" });
 		}
 	}, [router]);
 
