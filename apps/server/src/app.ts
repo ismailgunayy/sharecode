@@ -3,6 +3,7 @@ import HTTPService from "./services/http.js";
 import SessionController from "./controllers/session.controller.js";
 import SocketService from "./services/socket.js";
 import { TControllers } from "./types/express.type.js";
+import connectCacheService from "./middlewares/connectCacheService.js";
 import mainRouter from "./routes/index.js";
 
 // Services
@@ -12,7 +13,6 @@ const socketService = new SocketService(cacheService);
 
 // Controllers
 const sessionController = new SessionController(cacheService);
-
 const controllers: TControllers = {
 	session: sessionController
 };
@@ -20,14 +20,7 @@ const controllers: TControllers = {
 const init = async () => {
 	socketService.start(httpService.server);
 
-	httpService.addMiddleware(async (_req, _res, next) => {
-		if (!cacheService.isConnected()) {
-			await cacheService.start();
-		}
-
-		next();
-	});
-
+	httpService.addMiddleware(connectCacheService(cacheService));
 	httpService.start(mainRouter(controllers));
 
 	function gracefulShutdown() {
