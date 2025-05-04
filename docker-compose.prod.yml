@@ -14,7 +14,7 @@ services:
     command: yarn start:server
     build:
       context: .
-      dockerfile: apps/server/Dockerfile
+      dockerfile: apps/server/Dockerfile.prod
     restart: always
     depends_on:
       - redis
@@ -26,7 +26,7 @@ services:
     command: yarn start:client
     build:
       context: .
-      dockerfile: apps/client/Dockerfile
+      dockerfile: apps/client/Dockerfile.prod
     restart: always
     ports:
       - 3023:3023
