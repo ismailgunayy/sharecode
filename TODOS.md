@@ -22,6 +22,7 @@
 
 #### Bugs:
 
+- [ ] Random caret jump to start
 - [ ] Serverless not working properly
   - Only redis sleeps after 10 minutes of inactivity, client and server are always up
 - [x] Language choice should be binded to the session
