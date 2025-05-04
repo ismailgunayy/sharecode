@@ -8,6 +8,7 @@
 - [x] Implement sessions
   - Users should be able to share the session via links
 - [x] Add a 'copy to share' button to copy URL (For UX purposes)
+- [ ] Keep user's preferred theme in local storage
 - [ ] List recent sessions on homepage
 - [ ] Sessions will expire after 24 hours
 - [ ] Users should be able to see each other's caret positions
