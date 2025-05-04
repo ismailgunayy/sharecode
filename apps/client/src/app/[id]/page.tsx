@@ -67,7 +67,7 @@ export default function ShareCode() {
 			setCode(data);
 			socket.emit("update", { sessionID, data });
 		},
-		150,
+		230,
 		1000
 	);
 
