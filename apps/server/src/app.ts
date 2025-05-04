@@ -1,10 +1,10 @@
-import CacheService from "./services/cache.js";
-import HTTPService from "./services/http.js";
+import CacheService from "./services/cache.service.js";
+import HTTPService from "./services/http.service.js";
 import SessionController from "./controllers/session.controller.js";
-import SocketService from "./services/socket.js";
+import SocketService from "./services/socket.service.js";
 import { TControllers } from "./types/express.type.js";
-import connectCacheService from "./middlewares/connectCacheService.js";
-import mainRouter from "./routes/index.js";
+import checkCacheService from "./middlewares/checkCacheService.middleware.js";
+import mainRouter from "./routes/main.route.js";
 
 // Services
 const cacheService = new CacheService();
@@ -20,7 +20,7 @@ const controllers: TControllers = {
 const init = async () => {
 	socketService.start(httpService.server);
 
-	httpService.addMiddleware(connectCacheService(cacheService));
+	httpService.addMiddleware(checkCacheService(cacheService));
 	httpService.start(mainRouter(controllers));
 
 	function gracefulShutdown() {

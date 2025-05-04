@@ -1,7 +1,7 @@
 import express, { Express, RequestHandler, Router } from "express";
 import http, { Server } from "http";
 
-import config from "../config/index.js";
+import config from "../config/env.js";
 import cors from "cors";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";

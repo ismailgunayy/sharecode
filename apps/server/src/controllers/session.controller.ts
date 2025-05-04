@@ -1,4 +1,4 @@
-import CacheService from "../services/cache.js";
+import CacheService from "../services/cache.service.js";
 import { TController } from "../types/express.type.js";
 import { TSession } from "../types/session.type.js";
 import { v4 as uuid } from "uuid";
