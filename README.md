@@ -6,7 +6,7 @@
 
 # ShareCode
 
-A collaborative tool that allows developers to share their code in real-time.
+A collaborative tool for developers to share code in real time
 
 > ## **[🚀 Try it live now ](https://sharecode.up.railway.app)**
 
