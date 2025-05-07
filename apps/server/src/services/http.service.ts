@@ -16,7 +16,7 @@ class HTTPService {
 		this.app.use(helmet());
 		this.app.use(
 			cors({
-				origin: config.CLIENT_URL
+				origin: config.cors.CLIENT_URL
 			})
 		);
 		this.app.use(
@@ -33,8 +33,8 @@ class HTTPService {
 	public start(router: Router) {
 		this.app.use("/api", router);
 
-		this.server.listen(config.PORT, () => {
-			console.log(`HTTP server listening on port ${config.PORT}`);
+		this.server.listen(config.general.PORT, () => {
+			console.log(`HTTP server listening on port ${config.general.PORT}`);
 		});
 	}
 

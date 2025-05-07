@@ -12,7 +12,7 @@ class SocketService {
 		this.cacheService = cacheService;
 		this.server = new Server({
 			cors: {
-				origin: config.CLIENT_URL
+				origin: config.cors.CLIENT_URL
 			}
 		});
 	}
@@ -39,8 +39,7 @@ class SocketService {
 					if (response) {
 						const session: TSession = {
 							...JSON.parse(response),
-							data,
-							updatedAt: new Date()
+							data
 						};
 
 						await this.cacheService.set(sessionID, JSON.stringify(session));

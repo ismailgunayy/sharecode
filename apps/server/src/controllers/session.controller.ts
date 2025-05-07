@@ -51,7 +51,7 @@ class SessionController {
 		const session: TSession = {
 			id: sessionID,
 			createdAt: now,
-			updatedAt: now,
+			updatedAt: null,
 			data: "",
 			language: "typescript"
 		};

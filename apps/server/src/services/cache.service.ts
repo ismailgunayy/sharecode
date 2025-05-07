@@ -7,16 +7,17 @@ class CacheService {
 	private client: RedisClientType;
 	private timer: NodeJS.Timeout | null = null;
 	private readonly cacheServiceSleepTime: number;
+	private readonly dataTtlTime: number;
 
 	public constructor() {
-		this.client = createClient({ url: config.REDIS_URL });
+		this.client = createClient({ url: config.cache.REDIS_URL });
 
 		this.client.on("error", (error) => {
 			console.error("Redis Client Error", error);
 		});
 
-		this.cacheServiceSleepTime =
-			config.CACHE_SERVICE_SLEEP_TIME_IN_MINUTES * 60 * 1000;
+		this.cacheServiceSleepTime = config.cache.SLEEP_TIME_IN_MINUTES * 60 * 1000;
+		this.dataTtlTime = config.cache.DATA_TTL_IN_HOURS * 60 * 60;
 	}
 
 	public async start() {
@@ -47,7 +48,8 @@ class CacheService {
 
 	public async set(key: string, value: string): Promise<string | null> {
 		return this.executeCacheOperation(async () => {
-			return await this.client.set(key, value);
+			// EX: Expire time in seconds
+			return await this.client.set(key, value, { EX: this.dataTtlTime });
 		});
 	}
 
