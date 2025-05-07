@@ -1,6 +1,6 @@
 import { RedisClientType, createClient } from "redis";
 
-import config from "../config/env.js";
+import config from "../config/env.config.js";
 
 class CacheService {
 	private connected: boolean = false;

@@ -2,7 +2,7 @@ import CacheService from "./cache.service.js";
 import { Server as HTTPServer } from "http";
 import { Server } from "socket.io";
 import { TSession } from "../types/session.type.js";
-import config from "../config/env.js";
+import config from "../config/env.config.js";
 
 class SocketService {
 	private server: Server;
