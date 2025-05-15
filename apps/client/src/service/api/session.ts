@@ -3,13 +3,9 @@ import { TAPIResponse } from "@/types/api";
 import { TSession } from "@/types/session";
 import api from ".";
 
-export const getSession = async (
-	sessionID: string
-): Promise<TSession | void> => {
+export const getSession = async (sessionID: string): Promise<TSession | void> => {
 	try {
-		const { data } = await api.get<TAPIResponse>(
-			`${ENDPOINTS.SESSION.GET}/${sessionID}`
-		);
+		const { data } = await api.get<TAPIResponse>(`${ENDPOINTS.SESSION.GET}/${sessionID}`);
 
 		if (!data.success) {
 			throw new Error("Couldn't get session info");

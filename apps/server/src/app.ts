@@ -30,9 +30,7 @@ const init = async () => {
 	}
 
 	// TODO: Change with 'satisfies' and look into the 'sort-imports' package
-	(["SIGINT", "SIGTERM"] as NodeJS.Signals[]).forEach((signal) =>
-		process.on(signal, gracefulShutdown)
-	);
+	(["SIGINT", "SIGTERM"] as NodeJS.Signals[]).forEach((signal) => process.on(signal, gracefulShutdown));
 };
 
 init().catch((error) => {

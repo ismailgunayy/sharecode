@@ -15,13 +15,7 @@ type TCodeEditorProps = {
 	onChange: (value: string) => void;
 };
 
-function CodeEditor({
-	code,
-	theme,
-	language,
-	className,
-	onChange
-}: TCodeEditorProps) {
+function CodeEditor({ code, theme, language, className, onChange }: TCodeEditorProps) {
 	return (
 		<CodeMirror
 			className={clsx(className)}
@@ -29,10 +23,7 @@ function CodeEditor({
 			theme={themes[theme]}
 			width="100%"
 			height="100vh"
-			extensions={[
-				...(language ? [loadLanguage(language) as Extension] : []),
-				EditorView.lineWrapping
-			]}
+			extensions={[...(language ? [loadLanguage(language) as Extension] : []), EditorView.lineWrapping]}
 			onChange={onChange}
 			autoFocus
 		/>

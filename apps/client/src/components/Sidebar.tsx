@@ -36,15 +36,11 @@ const Sidebar = ({
 					Copy to Share!
 				</Button>
 			</div>
-			<h2 className="text-2xl w-full text-center mb-1 text-secondary">
-				Settings
-			</h2>
+			<h2 className="text-2xl w-full text-center mb-1 text-secondary">Settings</h2>
 			<hr className="brightness-50 mb-4" />
 			<h3 className="mb-1">Language</h3>
 			<Select
-				value={languageOptions.find(
-					(option) => option.value === selectedLanguage
-				)}
+				value={languageOptions.find((option) => option.value === selectedLanguage)}
 				placeholder="Choose a language..."
 				options={languageOptions}
 				onChange={handleLanguageChange}

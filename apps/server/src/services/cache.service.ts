@@ -72,10 +72,7 @@ class CacheService {
 	private resetTimer() {
 		this.clearTimer();
 
-		this.timer = setTimeout(
-			async () => await this.stop(),
-			this.cacheServiceSleepTime
-		);
+		this.timer = setTimeout(async () => await this.stop(), this.cacheServiceSleepTime);
 	}
 
 	private clearTimer() {

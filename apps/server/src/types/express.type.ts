@@ -8,11 +8,7 @@ type APIResponse = {
 	success: boolean;
 };
 
-export type TController = (
-	req: Request,
-	res: Response<APIResponse>,
-	next: NextFunction
-) => Promise<unknown>;
+export type TController = (req: Request, res: Response<APIResponse>, next: NextFunction) => Promise<unknown>;
 
 export type TControllers = {
 	session: SessionController;

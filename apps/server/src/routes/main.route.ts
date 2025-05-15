@@ -4,9 +4,7 @@ import healthRouter from "./health.route.js";
 import sessionRouter from "./session.route.js";
 
 const mainRouter = (controllers: TControllers) => {
-	return Router()
-		.use("/health", healthRouter())
-		.use("/session", sessionRouter(controllers.session));
+	return Router().use("/health", healthRouter()).use("/session", sessionRouter(controllers.session));
 };
 
 export default mainRouter;

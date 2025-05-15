@@ -14,9 +14,7 @@ class SessionController {
 		const sessionID = req.params.sessionID;
 
 		if (!sessionID) {
-			return res
-				.status(401)
-				.json({ message: "'sessionID' is required", success: false });
+			return res.status(401).json({ message: "'sessionID' is required", success: false });
 		}
 
 		try {
@@ -31,16 +29,12 @@ class SessionController {
 					data: session
 				});
 			} else {
-				return res
-					.status(404)
-					.json({ message: "Session not found", success: false });
+				return res.status(404).json({ message: "Session not found", success: false });
 			}
 		} catch (error) {
 			console.error("Error getting the session:", error);
 
-			return res
-				.status(500)
-				.json({ message: "Couldn't get session info", success: false });
+			return res.status(500).json({ message: "Couldn't get session info", success: false });
 		}
 	};
 
@@ -67,9 +61,7 @@ class SessionController {
 		} catch (error) {
 			console.error("Error creating the session:", error);
 
-			return res
-				.status(500)
-				.json({ message: "Couldn't create the session", success: false });
+			return res.status(500).json({ message: "Couldn't create the session", success: false });
 		}
 	};
 
@@ -77,23 +69,17 @@ class SessionController {
 		const sessionID: string = req.body.sessionID;
 
 		if (!sessionID) {
-			return res
-				.status(400)
-				.json({ message: "'sessionID' is required", success: false });
+			return res.status(400).json({ message: "'sessionID' is required", success: false });
 		}
 
 		try {
 			await this.cacheService.del(sessionID);
 
-			return res
-				.status(200)
-				.json({ message: "Session deleted succesfully", success: true });
+			return res.status(200).json({ message: "Session deleted succesfully", success: true });
 		} catch (error) {
 			console.error("Error deleting the session:", error);
 
-			return res
-				.status(500)
-				.json({ message: "Couldn't delete the session", success: false });
+			return res.status(500).json({ message: "Couldn't delete the session", success: false });
 		}
 	};
 }
