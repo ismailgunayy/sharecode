@@ -85,7 +85,7 @@ export default function ShareCode() {
 
 	return (
 		<div className="flex justify-center items-center h-full animate-fade-in">
-			<div className="relative flex-4/5 h-full">
+			<div className="relative h-full flex-3/4 sm:flex-4/5">
 				<CodeEditor
 					code={code}
 					theme={theme}
@@ -102,7 +102,7 @@ export default function ShareCode() {
 				</div>
 			</div>
 			<Sidebar
-				className="flex-1/5"
+				className="flex-1/4 sm:flex-1/5"
 				selectedLanguage={language}
 				languageOptions={editorLanguageOptions}
 				selectedTheme={theme}
