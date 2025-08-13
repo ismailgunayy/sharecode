@@ -7,6 +7,8 @@
 	"deploy": {
 		"restartPolicyType": "ALWAYS",
 		"sleepApplication": true,
-		"startCommand": "yarn workspace client run start"
+		"startCommand": "yarn workspace client run start",
+		"overlapSeconds": 60,
+		"drainingSeconds": 15
 	}
 }

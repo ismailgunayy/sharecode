@@ -9,6 +9,8 @@
 		"healthcheckTimeout": 300,
 		"restartPolicyType": "ALWAYS",
 		"sleepApplication": true,
-		"startCommand": "yarn workspace server run start"
+		"startCommand": "yarn workspace server run start",
+		"overlapSeconds": 60,
+		"drainingSeconds": 15
 	}
 }
