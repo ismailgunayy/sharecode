@@ -1,6 +1,7 @@
 import CacheService from "../services/cache.service.js";
 import { TController } from "../types/express.type.js";
 import { TSession } from "../types/session.type.js";
+import { logger } from "../common/logger.js";
 import { v4 as uuid } from "uuid";
 
 class SessionController {
@@ -32,13 +33,12 @@ class SessionController {
 				return res.status(404).json({ message: "Session not found", success: false });
 			}
 		} catch (error) {
-			console.error("Error getting the session:", error);
-
+			logger.error("Error getting session info:", error);
 			return res.status(500).json({ message: "Couldn't get session info", success: false });
 		}
 	};
 
-	createSession: TController = async (_req, res) => {
+	createSession: TController = async (req, res) => {
 		const sessionID = uuid();
 		const now = new Date();
 
@@ -54,13 +54,12 @@ class SessionController {
 			await this.cacheService.set(sessionID, JSON.stringify(session));
 
 			return res.status(201).json({
-				message: "Session created succesfully",
+				message: "Session created successfully",
 				success: true,
 				data: session
 			});
 		} catch (error) {
-			console.error("Error creating the session:", error);
-
+			logger.error("Error creating session:", error);
 			return res.status(500).json({ message: "Couldn't create the session", success: false });
 		}
 	};
@@ -75,10 +74,9 @@ class SessionController {
 		try {
 			await this.cacheService.del(sessionID);
 
-			return res.status(200).json({ message: "Session deleted succesfully", success: true });
+			return res.status(200).json({ message: "Session deleted successfully", success: true });
 		} catch (error) {
-			console.error("Error deleting the session:", error);
-
+			logger.error("Error deleting the session:", error);
 			return res.status(500).json({ message: "Couldn't delete the session", success: false });
 		}
 	};

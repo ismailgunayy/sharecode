@@ -1,7 +1,8 @@
 import express, { Express, RequestHandler, Router } from "express";
 import http, { Server } from "http";
+import { httpLogger, logger } from "../common/logger.js";
 
-import config from "../config/env.config.js";
+import config from "../common/env.js";
 import cors from "cors";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
@@ -12,6 +13,8 @@ class HTTPService {
 
 	public constructor() {
 		this.app = express();
+
+		this.app.use(httpLogger);
 		this.app.use(express.json());
 		this.app.use(helmet());
 		this.app.use(
@@ -19,6 +22,7 @@ class HTTPService {
 				origin: config.cors.CLIENT_URL
 			})
 		);
+		this.app.set("trust proxy", 1);
 		this.app.use(
 			rateLimit({
 				windowMs: 15 * 60 * 1000, // 15 minutes
@@ -34,7 +38,7 @@ class HTTPService {
 		this.app.use("/api", router);
 
 		this.server.listen(config.general.PORT, () => {
-			console.log(`HTTP server listening on port ${config.general.PORT}`);
+			logger.info(`HTTP server listening on port ${config.general.PORT}`);
 		});
 	}
 

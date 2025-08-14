@@ -4,6 +4,7 @@ import SessionController from "./controllers/session.controller.js";
 import SocketService from "./services/socket.service.js";
 import { TControllers } from "./types/express.type.js";
 import checkCacheService from "./middlewares/checkCacheService.middleware.js";
+import { logger } from "./common/logger.js";
 import mainRouter from "./routes/main.route.js";
 
 // Services
@@ -29,11 +30,10 @@ const init = async () => {
 		httpService.stop();
 	}
 
-	// TODO: Change with 'satisfies' and look into the 'sort-imports' package
 	(["SIGINT", "SIGTERM"] as NodeJS.Signals[]).forEach((signal) => process.on(signal, gracefulShutdown));
 };
 
 init().catch((error) => {
-	console.error("Failed to start server:", error);
+	logger.error("Failed to start server:", error);
 	process.exit(1);
 });

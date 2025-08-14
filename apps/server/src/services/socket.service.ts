@@ -2,7 +2,8 @@ import CacheService from "./cache.service.js";
 import { Server as HTTPServer } from "http";
 import { Server } from "socket.io";
 import { TSession } from "../types/session.type.js";
-import config from "../config/env.config.js";
+import config from "../common/env.js";
+import { logger } from "../common/logger.js";
 
 class SocketService {
 	private server: Server;
@@ -18,6 +19,7 @@ class SocketService {
 	}
 
 	public start(httpServer: HTTPServer) {
+		logger.info("Starting Socket Service...");
 		this.server.attach(httpServer);
 		this.setupSocket();
 	}
@@ -46,7 +48,7 @@ class SocketService {
 						this.server.to(sessionID).emit("update", data);
 					}
 				} catch (error) {
-					console.error("Couldn't update and publish data", error);
+					logger.error("Couldn't update and publish data", error);
 				}
 			});
 
@@ -64,12 +66,12 @@ class SocketService {
 						this.server.to(sessionID).emit("language", language);
 					}
 				} catch (error) {
-					console.error("Couldn't update and publish language", error);
+					logger.error("Couldn't update and publish language", error);
 				}
 			});
 
-			socket.on("disconnect", (test) => {
-				console.log(test);
+			socket.on("disconnect", (reason) => {
+				logger.info(`Client disconnected: ${reason}`);
 			});
 		});
 	}

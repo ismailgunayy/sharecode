@@ -1,6 +1,7 @@
 import { RedisClientType, createClient } from "redis";
 
-import config from "../config/env.config.js";
+import config from "../common/env.js";
+import { logger } from "../common/logger.js";
 
 class CacheService {
 	private connected: boolean = false;
@@ -13,7 +14,7 @@ class CacheService {
 		this.client = createClient({ url: config.cache.REDIS_URL });
 
 		this.client.on("error", (error) => {
-			console.error("Redis Client Error", error);
+			logger.error("Redis Client Error", error);
 		});
 
 		this.cacheServiceSleepTime = config.cache.SLEEP_TIME_IN_MINUTES * 60 * 1000;
@@ -22,6 +23,7 @@ class CacheService {
 
 	public async start() {
 		if (!this.connected) {
+			logger.info("Connecting to Cache Service...");
 			await this.client.connect();
 			this.connected = true;
 
