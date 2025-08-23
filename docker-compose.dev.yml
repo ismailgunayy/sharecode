@@ -1,7 +1,7 @@
 services:
   redis:
     container_name: sharecode-redis-dev
-    image: redis:7.2-alpine
+    image: redis:8.2-alpine
     restart: always
     volumes:
       - ./apps/server/redis.conf:/usr/local/etc/redis/redis.conf
