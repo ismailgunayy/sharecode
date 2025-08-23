@@ -33,7 +33,7 @@ class CacheService {
 
 	public async stop() {
 		this.clearTimer();
-
+		logger.info("Disconnecting from Cache Service...");
 		await this.client.disconnect();
 		this.connected = false;
 	}

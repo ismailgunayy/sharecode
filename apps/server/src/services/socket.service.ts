@@ -14,7 +14,11 @@ class SocketService {
 		this.server = new Server({
 			cors: {
 				origin: config.cors.CLIENT_URL
-			}
+			},
+			pingTimeout: 20000, // 20 seconds
+			pingInterval: 10000, // 10 seconds
+			connectTimeout: 20000, // 20 seconds
+			transports: ["websocket", "polling"]
 		});
 	}
 
@@ -30,8 +34,11 @@ class SocketService {
 
 	private setupSocket() {
 		this.server.on("connection", (socket) => {
+			logger.info(`Client connected: ${socket.id}`);
+
 			socket.on("join session", (sessionID) => {
 				socket.join(sessionID);
+				logger.info(`Socket ${socket.id} joined session: ${sessionID}`);
 			});
 
 			socket.on("update", async ({ sessionID, data }) => {
@@ -70,8 +77,23 @@ class SocketService {
 				}
 			});
 
+			// Add heartbeat/ping handling
+			socket.on("ping", () => {
+				socket.emit("pong");
+			});
+
 			socket.on("disconnect", (reason) => {
-				logger.info(`Client disconnected: ${reason}`);
+				logger.info(`Client disconnected: ${socket.id} - Reason: ${reason}`);
+			});
+
+			socket.on("error", (error) => {
+				logger.error(`Socket error for ${socket.id}:`, error);
+			});
+
+			// Clean up on disconnect
+			socket.on("disconnecting", () => {
+				logger.info(`Client disconnecting: ${socket.id}`);
+				// Socket.IO automatically handles room cleanup
 			});
 		});
 	}

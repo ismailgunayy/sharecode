@@ -1,14 +1,14 @@
 import express, { Express, RequestHandler, Router } from "express";
-import http, { Server } from "http";
 import { httpLogger, logger } from "../common/logger.js";
 
 import config from "../common/env.js";
 import cors from "cors";
 import helmet from "helmet";
+import http from "http";
 import rateLimit from "express-rate-limit";
 
 class HTTPService {
-	public server: Server;
+	public server: http.Server;
 	private app: Express;
 
 	public constructor() {
