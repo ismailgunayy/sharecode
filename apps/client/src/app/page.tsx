@@ -4,7 +4,6 @@ import Button from "@/components/ui/Button";
 import GitHub from "@/assets/icons/GitHub";
 import Image from "next/image";
 import Link from "next/link";
-import LinkedIn from "@/assets/icons/LinkedIn";
 import ShareCode from "@/assets/icons/ShareCode.png";
 import clsx from "clsx";
 import { createSession } from "@/service/api/session";
@@ -63,20 +62,7 @@ export default function Home() {
 						)}
 					/>
 				</Link>
-				<Link
-					href="https://linkedin.com/in/ismailgunayy"
-					target="_blank"
-				>
-					<LinkedIn
-						className={clsx(
-							"size-12 transition rounded-lg p-2",
-							"text-secondary",
-							"hover:text-primary hover:bg-secondary"
-						)}
-					/>
-				</Link>
 			</div>
-			<div className="absolute bottom-4 right-4 select-none"></div>
 		</div>
 	);
 }

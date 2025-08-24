@@ -55,13 +55,7 @@ export default function ShareCode() {
 		const url = window.location.href;
 		const shortenedUrl = await shortenUrl(url);
 
-		const type = "text/plain";
-		const clipboardItemData = {
-			[type]: shortenedUrl
-		};
-		const clipboardItem = new ClipboardItem(clipboardItemData);
-
-		await navigator.clipboard.write([clipboardItem]);
+		await navigator.clipboard.writeText(shortenedUrl);
 		toast.success("Copied the session URL", { id: "copied-session-url" });
 	};
 
