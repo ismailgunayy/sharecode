@@ -5,7 +5,8 @@ const nextConfig: NextConfig = {
 	env: {
 		PORT: process.env.PORT,
 		API_URL: process.env.API_URL,
-		WS_SERVER_URL: process.env.WS_SERVER_URL
+		WS_SERVER_URL: process.env.WS_SERVER_URL,
+		SHORTENER_API_URL: process.env.SHORTENER_API_URL
 	}
 };
 
