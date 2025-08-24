@@ -55,14 +55,14 @@ Create following files:
 
 ```bash
 # apps/client/.env
-API_URL=http://localhost:8023/api
-WS_SERVER_URL=ws://localhost:8023
+API_URL=http://localhost:3123/api
+WS_SERVER_URL=ws://localhost:3123
 ```
 
 ```bash
 # apps/server/.env
 NODE_ENV=development
-PORT=8023
+PORT=3123
 CLIENT_ORIGIN=http://localhost:3023
 
 REDIS_HOST=redis

@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const NODE_ENV = process.env.NODE_ENV || "development";
-const PORT = Number(process.env.PORT) || 8023;
+const PORT = Number(process.env.PORT) || 3123;
 const CLIENT_URL = process.env.CLIENT_ORIGIN || "http://localhost:3023";
 
 const REDIS_HOST = process.env.REDIS_HOST || "redis";

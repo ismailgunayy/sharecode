@@ -19,7 +19,7 @@ services:
     depends_on:
       - redis
     ports:
-      - 8023:8023
+      - 3123:3123
 
   client:
     container_name: sharecode-client

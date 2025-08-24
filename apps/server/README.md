@@ -3,7 +3,7 @@ Create `.env` and `redis.conf` files in `apps/server`
 ```bash
 # .env
 NODE_ENV=development
-PORT=8023
+PORT=3123
 CLIENT_ORIGIN=http://localhost:3023
 
 REDIS_HOST=redis
