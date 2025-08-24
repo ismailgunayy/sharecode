@@ -13,6 +13,7 @@ import debounce from "@/helpers/debounce";
 import editorLanguageOptions from "@/data/languages";
 import editorThemeOptions from "@/data/themes";
 import { getSession } from "@/service/api/session";
+import { shortenUrl } from "@/service/shortener";
 import toast from "react-hot-toast";
 import useSocket from "@/hooks/useSocket";
 
@@ -51,9 +52,12 @@ export default function ShareCode() {
 	}, [socket, sessionID]);
 
 	const handleCopyURL = async () => {
+		const url = window.location.href;
+		const shortenedUrl = await shortenUrl(url);
+
 		const type = "text/plain";
 		const clipboardItemData = {
-			[type]: window.location.href
+			[type]: shortenedUrl
 		};
 		const clipboardItem = new ClipboardItem(clipboardItemData);
 
