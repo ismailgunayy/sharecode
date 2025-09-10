@@ -66,7 +66,7 @@ PORT=3123
 CLIENT_ORIGIN=http://localhost:3023
 
 REDIS_HOST=redis
-REDIS_PORT=6379
+REDIS_PORT=6380
 REDIS_PASSWORD=password
 CACHE_SERVICE_SLEEP_TIME_IN_MINUTES=10
 CACHE_SERVICE_DATA_TTL_IN_HOURS=24
@@ -75,7 +75,7 @@ CACHE_SERVICE_DATA_TTL_IN_HOURS=24
 ```bash
 # apps/server/redis.conf
 requirepass password
-port 6379
+port 6380
 bind 0.0.0.0
 ```
 

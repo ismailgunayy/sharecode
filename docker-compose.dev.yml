@@ -7,7 +7,7 @@ services:
       - ./apps/server/redis.conf:/usr/local/etc/redis/redis.conf
     command: redis-server /usr/local/etc/redis/redis.conf
     ports:
-      - 6379:6379
+      - 6380:6380
 
   server:
     container_name: sharecode-server-dev
