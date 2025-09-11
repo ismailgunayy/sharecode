@@ -16,6 +16,6 @@ CACHE_SERVICE_DATA_TTL_IN_HOURS=24
 ```bash
 # redis.conf
 requirepass password
-port 6380
+port 6379
 bind 0.0.0.0
 ```
